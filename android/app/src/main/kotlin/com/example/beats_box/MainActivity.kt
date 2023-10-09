@@ -1,4 +1,4 @@
-package com.example.beats_box
+package com.ykstudios.beatsbox
 
 import io.flutter.embedding.android.FlutterActivity
 
