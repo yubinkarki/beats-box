@@ -1,0 +1,1 @@
+enum CurrentStack { authStack, homeStack }
