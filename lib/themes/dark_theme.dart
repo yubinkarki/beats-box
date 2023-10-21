@@ -7,6 +7,12 @@ ThemeData darkTheme(BuildContext context) {
   final base = ThemeData.dark();
 
   return base.copyWith(
+    pageTransitionsTheme: const PageTransitionsTheme(
+      builders: <TargetPlatform, PageTransitionsBuilder>{
+        TargetPlatform.android: CupertinoPageTransitionsBuilder(),
+        TargetPlatform.iOS: CupertinoPageTransitionsBuilder(),
+      },
+    ),
     appBarTheme: const AppBarTheme(color: AppColors.dark),
     colorScheme: const ColorScheme.dark(
       primary: AppColors.slightlyWhite,

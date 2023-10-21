@@ -7,6 +7,12 @@ ThemeData lightTheme(BuildContext context) {
   final base = ThemeData.light();
 
   return base.copyWith(
+    pageTransitionsTheme: const PageTransitionsTheme(
+      builders: <TargetPlatform, PageTransitionsBuilder>{
+        TargetPlatform.android: CupertinoPageTransitionsBuilder(),
+        TargetPlatform.iOS: CupertinoPageTransitionsBuilder(),
+      },
+    ),
     appBarTheme: const AppBarTheme(color: AppColors.teal),
     colorScheme: const ColorScheme.light(
       error: AppColors.red,
