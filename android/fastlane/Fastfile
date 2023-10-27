@@ -1,0 +1,75 @@
+# This file contains the fastlane.tools configuration
+# You can find the documentation at https://docs.fastlane.tools
+#
+# For a list of all available actions, check out
+#
+#     https://docs.fastlane.tools/actions
+#
+# For a list of all available plugins, check out
+#
+#     https://docs.fastlane.tools/plugins/available-plugins
+#
+
+# Uncomment the line if you want fastlane to automatically update itself
+# update_fastlane
+
+default_platform(:android)
+
+platform :android do
+  desc "Gradle and Flutter clean"
+  lane :clean do
+    gradle(task: "clean")
+
+    Dir.chdir "../.." do
+      sh("flutter clean")
+      sh("flutter pub get")
+    end
+  end
+
+  desc "Set version name and build number"
+  lane :set_versions do
+    app = load_json(json_path: "../app.json")
+
+    android_set_version_name(version_name: app["android"]["version"])
+
+    android_set_version_code(version_code: app["android"]["buildNumber"])
+  end
+  
+  desc "Generic function to use firebase_app_distribution plugin"
+  lane :distribute_to_firebase do |options|
+    app_id = options[:app_id]
+    groups = options[:groups]
+    firebase_cli_token = options[:firebase_cli_token]
+    apk_path = options[:apk_path]
+
+    missing_parameters = [app_id, groups, firebase_cli_token, apk_path].any? { |param| param.nil? }
+
+    if missing_parameters
+      raise "Missing required parameters. Make sure to provide all values."
+    end
+
+    firebase_app_distribution(
+      app: app_id,
+      groups: groups,
+      release_notes: File.read("../../release_notes.txt"),
+      firebase_cli_token: firebase_cli_token,
+      apk_path: apk_path
+    )
+  end
+
+  desc "Release build on Firebase"
+  lane :release do |options|
+    clean
+
+    Dir.chdir "../.." do
+      sh("flutter build apk -t lib/main.dart --flavor=dev --release")
+    end
+
+    distribute_to_firebase(
+      app_id: '1:25273579208:android:c327636596933a86a997fd',
+      groups: "beatsbox-testers",
+      firebase_cli_token: options[:firebase_token],
+      apk_path: "../build/app/outputs/flutter-apk/app-dev-release.apk"
+    )
+  end
+end
