@@ -70,8 +70,8 @@ platform :ios do
     )
   end
 
-  # This is for Firebase distribution. Development scheme, release apk.
-  lane :development do
+  # This is for Firebase distribution.
+  lane :release do
     build_ipa(
       scheme: "Runner",
       config: "Release",

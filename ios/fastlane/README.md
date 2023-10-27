@@ -39,10 +39,10 @@ Generic function to use firebase_app_distribution plugin
 
 Run gym to build ipa
 
-### ios development
+### ios release
 
 ```sh
-[bundle exec] fastlane ios development
+[bundle exec] fastlane ios release
 ```
 
 
