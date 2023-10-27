@@ -30,9 +30,8 @@ platform :ios do
     app_id = options[:app_id]
     groups = options[:groups]
     ipa_path = options[:ipa_path]
-    firebase_cli_token = options[:firebase_cli_token]
 
-    missing_parameters = [app_id, groups, firebase_cli_token, ipa_path].any? { |param| param.nil? }
+    missing_parameters = [app_id, groups, ipa_path].any? { |param| param.nil? }
 
     if missing_parameters
       raise "Missing required parameters. Make sure to provide all values."
@@ -42,7 +41,6 @@ platform :ios do
       app: app_id,
       groups: groups,
       ipa_path: ipa_path,
-      firebase_cli_token: firebase_cli_token,
       release_notes: File.read("../../release_notes.txt")
     )
   end
@@ -64,7 +62,7 @@ platform :ios do
       scheme: scheme,
       output_name: ipa_name,
       configuration: config,
-      export_method: "ad-hoc",
+      export_method: "development",
       output_directory: "archives",
       workspace: "Runner.xcworkspace"
     )
