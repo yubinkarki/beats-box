@@ -30,6 +30,7 @@ platform :ios do
     app_id = options[:app_id]
     groups = options[:groups]
     ipa_path = options[:ipa_path]
+    firebase_cli_token = options[:firebase_cli_token]
 
     missing_parameters = [app_id, groups, ipa_path].any? { |param| param.nil? }
 
@@ -41,6 +42,7 @@ platform :ios do
       app: app_id,
       groups: groups,
       ipa_path: ipa_path,
+      firebase_cli_token: firebase_cli_token,
       release_notes: File.read("../../release_notes.txt")
     )
   end
@@ -79,6 +81,7 @@ platform :ios do
     distribute_to_firebase(
       groups: "mercury-dev-testers",
       ipa_path: "archives/BeatsBox.ipa",
+      firebase_cli_token: options[:firebase_token],
       app_id: "1:25273579208:ios:77ded63450a5c3bfa997fd"
     )
   end
