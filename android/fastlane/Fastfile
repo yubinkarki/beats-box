@@ -18,8 +18,6 @@ default_platform(:android)
 platform :android do
   desc "Gradle and Flutter clean"
   lane :clean do
-    gradle(task: "clean")
-
     Dir.chdir "../.." do
       sh("flutter clean")
       sh("flutter pub get")

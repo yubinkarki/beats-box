@@ -5,22 +5,32 @@
     
     
       
-      <testcase classname="fastlane.lanes" name="0: default_platform" time="0.000513">
+      <testcase classname="fastlane.lanes" name="0: default_platform" time="0.000771">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="1: load_json" time="0.000602">
+      <testcase classname="fastlane.lanes" name="1: Switch to android clean lane" time="0.000254">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="2: android_set_version_name" time="0.002823">
+      <testcase classname="fastlane.lanes" name="2: flutter clean" time="6.106386">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="3: android_set_version_code" time="0.001463">
+      <testcase classname="fastlane.lanes" name="3: flutter pub get" time="6.271145">
+        
+      </testcase>
+    
+      
+      <testcase classname="fastlane.lanes" name="4: flutter build apk -t lib/main.dart --flavor=dev --release" time="58.673481">
+        
+      </testcase>
+    
+      
+      <testcase classname="fastlane.lanes" name="5: Switch to android distribute_to_firebase lane" time="0.00078">
         
       </testcase>
     
