@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "25273579208",
+    "project_id": "beats-box-ykstudios",
+    "storage_bucket": "beats-box-ykstudios.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:25273579208:android:c327636596933a86a997fd",
+        "android_client_info": {
+          "package_name": "com.ykstudios.beatsbox"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "25273579208-4gj35inv059mgo7ith6ehbn2b4purh2e.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.ykstudios.beatsbox",
+            "certificate_hash": "3c037f7e67a7b089b895c87a6d961f4dd359bb25"
+          }
+        },
+        {
+          "client_id": "25273579208-0quba7ptpicposud1ju1jmdqav46u1ur.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDvtPV4cgRwFwQ_VV0tVhu9TLn4nKeDo28"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "25273579208-0quba7ptpicposud1ju1jmdqav46u1ur.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "25273579208-sr07urs923096smikejj99ebonovg5gm.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.ykstudios.beatsbox"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
