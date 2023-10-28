@@ -1,0 +1,33 @@
+import 'package:flutter/material.dart';
+
+import 'package:beats_box/constants/constants_barrel.dart' show AppPaddings, AppSizes;
+
+InputDecoration inputDecoration({
+  required rightIcon,
+  required String labelText,
+  required String helperText,
+  required ColorScheme colorTheme,
+}) {
+  return InputDecoration(
+    labelText: labelText,
+    helperText: helperText,
+    suffixIcon: rightIcon,
+    contentPadding: const EdgeInsets.symmetric(horizontal: AppPaddings.p16),
+    enabledBorder: OutlineInputBorder(
+      borderSide: const BorderSide(width: 1, color: Colors.grey),
+      borderRadius: BorderRadius.circular(AppSizes.s10),
+    ),
+    focusedBorder: OutlineInputBorder(
+      borderSide: BorderSide(width: 1, color: colorTheme.outline),
+      borderRadius: BorderRadius.circular(AppSizes.s10),
+    ),
+    errorBorder: OutlineInputBorder(
+      borderSide: BorderSide(width: 1, color: colorTheme.error),
+      borderRadius: BorderRadius.circular(AppSizes.s10),
+    ),
+    focusedErrorBorder: OutlineInputBorder(
+      borderSide: BorderSide(width: 1, color: colorTheme.error),
+      borderRadius: BorderRadius.circular(AppSizes.s10),
+    ),
+  );
+}
