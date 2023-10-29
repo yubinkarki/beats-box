@@ -71,7 +71,7 @@ platform :ios do
   end
 
   # This is for Firebase distribution.
-  lane :release do
+  lane :release do |options|
     build_ipa(
       scheme: "Runner",
       config: "Release",
@@ -79,7 +79,7 @@ platform :ios do
     )
 
     distribute_to_firebase(
-      groups: "mercury-dev-testers",
+      groups: "beatsbox-testers",
       ipa_path: "archives/BeatsBox.ipa",
       firebase_cli_token: options[:firebase_token],
       app_id: "1:25273579208:ios:77ded63450a5c3bfa997fd"
