@@ -11,10 +11,10 @@ Future<T?> showCustomGenericDialog<T>({
   final options = optionsBuilder();
   final TextTheme textTheme = Theme.of(context).textTheme;
 
-  return showDialog<T>(
+  return showAdaptiveDialog<T>(
     context: context,
     builder: (context) {
-      return AlertDialog(
+      return AlertDialog.adaptive(
         title: Text(title, style: textTheme.labelLarge),
         content: Text(content, style: textTheme.labelMedium),
         actions: options.keys.map((optionTitle) {
