@@ -8,3 +8,7 @@ abstract class AuthEvent {
 class CheckIsLoggedIn extends AuthEvent {
   const CheckIsLoggedIn();
 }
+
+class SignInWithGoogle extends AuthEvent {
+  const SignInWithGoogle();
+}
