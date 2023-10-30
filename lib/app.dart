@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:beats_box/bloc/auth/auth_bloc.dart' show AuthBloc;
+import 'package:beats_box/repositories/auth_repo.dart' show AuthRepo;
 import 'package:beats_box/globals/globals_barrel.dart' show GlobalMediaQuery;
 import 'package:beats_box/navigations/navigations_barrel.dart' show AppRouter;
 import 'package:beats_box/themes/themes_barrel.dart' show lightTheme, darkTheme;
@@ -15,7 +16,7 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider<AuthBloc>(create: (context) => AuthBloc()),
+        BlocProvider<AuthBloc>(create: (context) => AuthBloc(authRepo: AuthRepo())),
       ],
       child: LayoutBuilder(
         builder: (context, constraints) {
