@@ -40,6 +40,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
       if (googleToken != null) {
         debugPrint("This is google date: $googleToken $googleUserData");
+        emit(const AuthenticationSuccess());
       } else {
         emit(const AuthenticationFailure(AppStrings.loginCancelled));
       }
