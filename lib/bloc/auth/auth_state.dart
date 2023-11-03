@@ -12,9 +12,7 @@ class InitialAuthState extends AuthState {
 }
 
 class IsLoggedIn extends AuthState {
-  final bool isLoggedIn;
-
-  const IsLoggedIn({this.isLoggedIn = false});
+  const IsLoggedIn();
 }
 
 class IsLoggedOut extends AuthState {
