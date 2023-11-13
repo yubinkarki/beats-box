@@ -2,9 +2,4 @@ enum CurrentStack { authStack, homeStack }
 
 enum LoggedInStatus { isLoggedIn, isLoggedOut }
 
-enum SharedUser {
-  firstRun,
-  authEmail,
-  authToken,
-  googleLoginUserDetails,
-}
+enum SharedUser { firstRun, authEmail, authToken, googleUserDetails }
