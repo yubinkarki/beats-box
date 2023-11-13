@@ -7,9 +7,11 @@ import 'package:beats_box/constants/constants_barrel.dart' show LoggedInStatus, 
 class SecureAppStorage {
   final _storage = getIt.get<FlutterSecureStorage>();
 
-  Future<void> initIsLoggedIn() async {
+  Future<void> initLoggedIn() async {
     try {
       final existingValue = await _storage.read(key: LoggedInStatus.isLoggedIn.toString());
+
+      debugPrint("Current isLoggedIn value $existingValue");
 
       if (existingValue == null) {
         await _storage.write(key: LoggedInStatus.isLoggedIn.toString(), value: "false");
@@ -17,5 +19,11 @@ class SecureAppStorage {
     } catch (e) {
       debugPrint("${AppStrings.isLoggedInWriteError} $e");
     }
+  }
+
+  Future<void> readAllStorageValues() async {
+    Map<String, String> allValues = await _storage.readAll();
+
+    debugPrint("All storage values $allValues");
   }
 }
