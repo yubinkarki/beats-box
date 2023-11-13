@@ -1,15 +1,28 @@
+import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart' show SharedPreferences;
 import 'package:flutter_secure_storage/flutter_secure_storage.dart' show FlutterSecureStorage;
 
 import 'package:beats_box/services/services_barrel.dart' show getIt;
 import 'package:beats_box/constants/constants_barrel.dart' show LoggedInStatus, SharedUser;
 
-Future<void> checkFirstRun() async {
-  final pref = getIt.get<SharedPreferences>();
-  final storage = getIt.get<FlutterSecureStorage>();
+final pref = getIt.get<SharedPreferences>();
+final storage = getIt.get<FlutterSecureStorage>();
 
-  if (pref.getBool(SharedUser.firstRun.toString()) ?? true) {
+Future<void> checkFirstRun() async {
+  final bool? firstRun = pref.getBool(SharedUser.firstRun.toString());
+
+  debugPrint("This is check first run $firstRun");
+
+  if (firstRun ?? true) {
+    debugPrint("This is running because first run.");
+
     await storage.delete(key: LoggedInStatus.isLoggedIn.toString());
     pref.setBool(SharedUser.firstRun.toString(), false);
   }
+}
+
+Future<void> readFirstRun() async {
+  final bool? firstRun = pref.getBool(SharedUser.firstRun.toString());
+
+  debugPrint("This is read first run $firstRun");
 }
