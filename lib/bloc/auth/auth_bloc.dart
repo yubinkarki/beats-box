@@ -1,19 +1,19 @@
 import 'dart:developer' show inspect;
 
-import 'package:beats_box/constants/app_strings.dart';
-import 'package:bloc/bloc.dart' show Bloc, Emitter;
 import 'package:flutter/material.dart';
 
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:bloc/bloc.dart' show Bloc, Emitter;
 import 'package:google_sign_in/google_sign_in.dart' show GoogleSignInAccount;
+import 'package:flutter_secure_storage/flutter_secure_storage.dart' show FlutterSecureStorage;
 
-import 'package:beats_box/services/locator.dart';
-import 'package:beats_box/bloc/auth/auth_event.dart';
-import 'package:beats_box/bloc/auth/auth_state.dart';
+import 'package:beats_box/bloc/blocs_barrel.dart';
+import 'package:beats_box/services/services_barrel.dart' show getIt;
 import 'package:beats_box/repositories/repositories_barrel.dart' show AuthRepo;
+import 'package:beats_box/constants/constants_barrel.dart' show LoggedInStatus, AppStrings;
 
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
   final AuthRepo authRepo;
+  final storage = getIt.get<FlutterSecureStorage>();
 
   AuthBloc({required this.authRepo}) : super(const InitialAuthState()) {
     on<CheckIsLoggedIn>(_checkIsLoggedIn);
@@ -23,10 +23,10 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   Future<void> _checkIsLoggedIn(CheckIsLoggedIn event, Emitter<AuthState> emit) async {
     final storage = getIt.get<FlutterSecureStorage>();
 
-    final String isLoggedInData = await storage.read(key: "isLoggedIn") ?? "false";
+    final String isLoggedInData = await storage.read(key: LoggedInStatus.isLoggedIn.toString()) ?? "false";
 
     if (isLoggedInData == "true") {
-      emit(IsLoggedIn(isLoggedIn: bool.fromEnvironment(isLoggedInData)));
+      emit(const IsLoggedIn());
     } else {
       emit(const IsLoggedOut());
     }
@@ -40,6 +40,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
       if (googleToken != null) {
         debugPrint("This is google date: $googleToken $googleUserData");
+        await storage.write(key: LoggedInStatus.isLoggedIn.toString(), value: "true");
         emit(const AuthenticationSuccess());
       } else {
         emit(const AuthenticationFailure(AppStrings.loginCancelled));
