@@ -1,19 +1,26 @@
 import 'package:flutter/material.dart';
-import "package:flutter_native_splash/flutter_native_splash.dart";
+
+import "package:flutter_bloc/flutter_bloc.dart" show Bloc;
+import "package:flutter_native_splash/flutter_native_splash.dart" show FlutterNativeSplash;
 
 import "app.dart" show App;
-import "package:beats_box/services/services_barrel.dart" show setupLocator, SecureAppStorage, androidSystemUI;
+import "package:beats_box/services/services_barrel.dart"
+    show AppBlocObserver, SecureAppStorage, androidSystemUI, checkFirstRun, setupLocator;
 
 void main() async {
   final widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
 
   FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
 
+  Bloc.observer = const AppBlocObserver();
+
   androidSystemUI();
 
-  await setupLocator();
+  await setupLocator(); // Register singleton via GetIt.
 
-  await SecureAppStorage().initIsLoggedIn();
+  await checkFirstRun();
+
+  await SecureAppStorage().initLoggedIn();
 
   runApp(const App());
 }
