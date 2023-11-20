@@ -7,15 +7,21 @@ import 'package:google_sign_in/google_sign_in.dart' show GoogleSignInAccount;
 import 'package:flutter_secure_storage/flutter_secure_storage.dart' show FlutterSecureStorage;
 
 import 'package:beats_box/bloc/blocs_barrel.dart';
+import 'package:beats_box/services/services_barrel.dart' show AuthProvider;
 import 'package:beats_box/services/services_barrel.dart' show getIt;
 import 'package:beats_box/repositories/repositories_barrel.dart' show AuthRepo;
 import 'package:beats_box/constants/constants_barrel.dart' show LoggedInStatus, AppStrings;
 
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
   final AuthRepo authRepo;
-  final storage = getIt.get<FlutterSecureStorage>();
+  final AuthProvider provider;
+  final FlutterSecureStorage storage;
 
-  AuthBloc({required this.authRepo}) : super(const InitialAuthState()) {
+  AuthBloc({
+    required this.authRepo,
+    required this.provider,
+    required this.storage,
+  }) : super(const InitialAuthState()) {
     on<CheckIsLoggedIn>(_checkIsLoggedIn);
     on<SignInWithGoogle>(_signInWithGoogle);
   }
