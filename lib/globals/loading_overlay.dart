@@ -1,5 +1,9 @@
-import 'package:flutter/material.dart';
+import 'dart:io' show Platform;
 
+import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart' show CupertinoActivityIndicator;
+
+import 'package:beats_box/constants/app_sizes.dart' show AppSizes;
 import 'package:beats_box/constants/constants_barrel.dart' show AppColors;
 import 'package:beats_box/globals/loading_overlay_controller.dart' show LoadingOverlayController;
 
@@ -25,11 +29,15 @@ class LoadingOverlay {
           child: Center(
             child: Container(
               decoration: const BoxDecoration(color: AppColors.transparent),
-              child: const SingleChildScrollView(
+              child: SingleChildScrollView(
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   mainAxisAlignment: MainAxisAlignment.center,
-                  children: [CircularProgressIndicator()],
+                  children: [
+                    Platform.isIOS
+                        ? const CupertinoActivityIndicator(radius: AppSizes.s20)
+                        : const CircularProgressIndicator()
+                  ],
                 ),
               ),
             ),
