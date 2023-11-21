@@ -1,13 +1,13 @@
 import "package:equatable/equatable.dart" show Equatable;
 
-class User extends Equatable {
+class GoogleUser extends Equatable {
   final int? userId;
   final String? gender;
   final String? fullName;
   final String? emailAddress;
   final String? profilePicture;
 
-  const User({
+  const GoogleUser({
     this.userId,
     this.gender,
     this.fullName,
