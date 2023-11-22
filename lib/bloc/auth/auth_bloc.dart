@@ -18,12 +18,13 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   final FlutterSecureStorage storage;
 
   AuthBloc({
+    required this.storage,
     required this.authRepo,
     required this.provider,
-    required this.storage,
   }) : super(const InitialAuthState()) {
     on<CheckIsLoggedIn>(_checkIsLoggedIn);
     on<SignInWithGoogle>(_signInWithGoogle);
+    on<SignInWithCustomEmail>(_signInWithCustomEmail);
   }
 
   Future<void> _checkIsLoggedIn(CheckIsLoggedIn event, Emitter<AuthState> emit) async {
@@ -53,6 +54,21 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       }
     } catch (e) {
       inspect(e);
+      emit(const AuthenticationFailure(AppStrings.somethingWentWrong));
+    }
+  }
+
+  Future<void> _signInWithCustomEmail(SignInWithCustomEmail event, Emitter<AuthState> emit) async {
+    emit(const IsLoggedOut(isLoading: true));
+
+    await Future.delayed(const Duration(seconds: 2));
+
+    try {
+      // final user = await provider.logIn(email: event.email, password: event.password);
+
+      emit(const IsLoggedOut(isLoading: false));
+      // emit(AuthenticationSuccess(customUser: user));
+    } on Exception catch (e) {
       emit(const AuthenticationFailure(AppStrings.somethingWentWrong));
     }
   }

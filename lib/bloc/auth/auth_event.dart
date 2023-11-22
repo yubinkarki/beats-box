@@ -12,3 +12,9 @@ class CheckIsLoggedIn extends AuthEvent {
 class SignInWithGoogle extends AuthEvent {
   const SignInWithGoogle();
 }
+
+class SignInWithCustomEmail extends AuthEvent {
+  final String email, password;
+
+  const SignInWithCustomEmail(this.email, this.password);
+}

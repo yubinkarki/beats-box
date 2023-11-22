@@ -1,5 +1,7 @@
 import 'package:flutter/foundation.dart';
 
+import 'package:beats_box/models/models_barrel.dart' show CustomAuthUser, GoogleUser;
+
 @immutable
 abstract class AuthState {
   final bool isLoading;
@@ -16,11 +18,14 @@ class IsLoggedIn extends AuthState {
 }
 
 class IsLoggedOut extends AuthState {
-  const IsLoggedOut();
+  const IsLoggedOut({super.isLoading});
 }
 
 class AuthenticationSuccess extends AuthState {
-  const AuthenticationSuccess();
+  final GoogleUser? googleUser;
+  final CustomAuthUser? customUser;
+
+  const AuthenticationSuccess({this.customUser, this.googleUser});
 }
 
 class AuthenticationFailure extends AuthState {
