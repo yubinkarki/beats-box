@@ -16,5 +16,6 @@ class AppColors {
   static const Color purpleOutline = Color.fromRGBO(127, 38, 178, 1.0);
   static const Color transparentBlack = Color.fromRGBO(0, 0, 0, 0.002);
   static const Color slightlyWhite = Color.fromRGBO(242, 242, 242, 1.0);
+  static const Color translucentBlackSpinner = Color.fromRGBO(0, 0, 0, 0.5);
   static const Color slightlyWhiteLessTransparent = Color.fromRGBO(242, 242, 242, 0.3);
 }
