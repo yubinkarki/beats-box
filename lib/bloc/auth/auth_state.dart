@@ -18,7 +18,11 @@ class IsLoggedIn extends AuthState {
 }
 
 class IsLoggedOut extends AuthState {
-  const IsLoggedOut({super.isLoading});
+  const IsLoggedOut();
+}
+
+class Authenticating extends AuthState {
+  const Authenticating({super.isLoading});
 }
 
 class AuthenticationSuccess extends AuthState {
@@ -28,8 +32,13 @@ class AuthenticationSuccess extends AuthState {
   const AuthenticationSuccess({this.customUser, this.googleUser});
 }
 
+class AccountCreationSuccess extends AuthState {
+  const AccountCreationSuccess();
+}
+
 class AuthenticationFailure extends AuthState {
   final String errorMessage;
+  final Exception? exception;
 
-  const AuthenticationFailure(this.errorMessage);
+  const AuthenticationFailure(this.errorMessage, this.exception);
 }
