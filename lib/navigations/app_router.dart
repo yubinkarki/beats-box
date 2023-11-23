@@ -6,6 +6,9 @@ import 'package:beats_box/constants/constants_barrel.dart';
 class AppRouter {
   static Route<dynamic> getRoute(RouteSettings routes) {
     switch (routes.name) {
+      case AppRoutes.home:
+        return MaterialPageRoute(builder: (context) => const HomeView());
+
       case AppRoutes.login:
         return MaterialPageRoute(builder: (context) => const LoginView());
 
