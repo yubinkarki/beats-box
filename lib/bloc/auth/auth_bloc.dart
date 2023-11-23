@@ -28,12 +28,10 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   }
 
   Future<void> _initializeProvider(AuthEventInitialize event, Emitter<AuthState> emit) async {
-    print("adding initialize provider");
     await provider.initialize();
   }
 
   Future<void> _checkIsLoggedIn(CheckIsLoggedIn event, Emitter<AuthState> emit) async {
-    print("adding check is logged in");
     final storage = getIt.get<FlutterSecureStorage>();
 
     final String isLoggedInData = await storage.read(key: LoggedInStatus.isLoggedIn.toString()) ?? "false";
@@ -72,8 +70,6 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       await provider
           .logIn(email: event.email, password: event.password)
           .then((value) => emit(const AuthenticationSuccess()));
-
-      // print("this is login with custom email in auth bloc $user");
 
       emit(const Authenticating(isLoading: false));
     } on Exception catch (e) {
