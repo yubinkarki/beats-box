@@ -1,5 +1,3 @@
-import 'dart:developer' show inspect;
-
 import 'package:flutter/material.dart';
 
 import 'package:bloc/bloc.dart' show Bloc, Emitter;
@@ -7,8 +5,8 @@ import 'package:google_sign_in/google_sign_in.dart' show GoogleSignInAccount;
 import 'package:flutter_secure_storage/flutter_secure_storage.dart' show FlutterSecureStorage;
 
 import 'package:beats_box/bloc/blocs_barrel.dart';
-import 'package:beats_box/services/services_barrel.dart' show AuthProvider;
 import 'package:beats_box/services/services_barrel.dart' show getIt;
+import 'package:beats_box/services/services_barrel.dart' show AuthProvider;
 import 'package:beats_box/repositories/repositories_barrel.dart' show AuthRepo;
 import 'package:beats_box/constants/constants_barrel.dart' show LoggedInStatus, AppStrings;
 
@@ -24,10 +22,18 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   }) : super(const InitialAuthState()) {
     on<CheckIsLoggedIn>(_checkIsLoggedIn);
     on<SignInWithGoogle>(_signInWithGoogle);
+    on<AuthEventInitialize>(_initializeProvider);
     on<SignInWithCustomEmail>(_signInWithCustomEmail);
+    on<RegisterWithCustomEmail>(_registerWithCustomEmail);
+  }
+
+  Future<void> _initializeProvider(AuthEventInitialize event, Emitter<AuthState> emit) async {
+    print("adding initialize provider");
+    await provider.initialize();
   }
 
   Future<void> _checkIsLoggedIn(CheckIsLoggedIn event, Emitter<AuthState> emit) async {
+    print("adding check is logged in");
     final storage = getIt.get<FlutterSecureStorage>();
 
     final String isLoggedInData = await storage.read(key: LoggedInStatus.isLoggedIn.toString()) ?? "false";
@@ -50,26 +56,43 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         await storage.write(key: LoggedInStatus.isLoggedIn.toString(), value: "true");
         emit(const AuthenticationSuccess());
       } else {
-        emit(const AuthenticationFailure(AppStrings.loginCancelled));
+        emit(const AuthenticationFailure(AppStrings.loginCancelled, null));
       }
-    } catch (e) {
-      inspect(e);
-      emit(const AuthenticationFailure(AppStrings.somethingWentWrong));
+    } on Exception catch (e) {
+      emit(AuthenticationFailure(AppStrings.somethingWentWrong, e));
     }
   }
 
   Future<void> _signInWithCustomEmail(SignInWithCustomEmail event, Emitter<AuthState> emit) async {
-    emit(const IsLoggedOut(isLoading: true));
+    emit(const Authenticating(isLoading: true));
 
-    await Future.delayed(const Duration(seconds: 2));
+    await Future.delayed(const Duration(milliseconds: 500));
 
     try {
-      // final user = await provider.logIn(email: event.email, password: event.password);
+      await provider
+          .logIn(email: event.email, password: event.password)
+          .then((value) => emit(const AuthenticationSuccess()));
 
-      emit(const IsLoggedOut(isLoading: false));
-      // emit(AuthenticationSuccess(customUser: user));
+      // print("this is login with custom email in auth bloc $user");
+
+      emit(const Authenticating(isLoading: false));
     } on Exception catch (e) {
-      emit(const AuthenticationFailure(AppStrings.somethingWentWrong));
+      emit(const Authenticating(isLoading: false));
+      emit(AuthenticationFailure(AppStrings.somethingWentWrong, e));
+    }
+  }
+
+  Future<void> _registerWithCustomEmail(RegisterWithCustomEmail event, Emitter<AuthState> emit) async {
+    emit(const Authenticating(isLoading: true));
+
+    try {
+      await provider.signUp(email: event.email, password: event.password, fullName: event.fullName).then((value) {
+        emit(const Authenticating(isLoading: false));
+        emit(const AccountCreationSuccess());
+      });
+    } on Exception catch (e) {
+      emit(const Authenticating(isLoading: false));
+      emit(AuthenticationFailure(AppStrings.somethingWentWrong, e));
     }
   }
 }
