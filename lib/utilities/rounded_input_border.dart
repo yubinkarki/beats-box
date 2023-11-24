@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:beats_box/constants/constants_barrel.dart' show AppPaddings, AppSizes;
+import 'package:beats_box/constants/constants_barrel.dart' show AppPaddings, AppSizes, AppStrings;
 
 InputDecoration inputDecoration({
   required rightIcon,
@@ -10,8 +10,9 @@ InputDecoration inputDecoration({
 }) {
   return InputDecoration(
     labelText: labelText,
-    helperText: helperText,
     suffixIcon: rightIcon,
+    helperText: helperText,
+    counterText: AppStrings.empty,
     contentPadding: const EdgeInsets.symmetric(horizontal: AppPaddings.p16),
     enabledBorder: OutlineInputBorder(
       borderSide: const BorderSide(width: 1, color: Colors.grey),
