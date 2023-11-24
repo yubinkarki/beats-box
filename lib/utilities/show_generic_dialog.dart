@@ -23,9 +23,9 @@ Future<T?> showCustomGenericDialog<T>({
           return TextButton(
             onPressed: () {
               if (value != null) {
-                Navigator.of(context).pop(value);
+                Navigator.of(context, rootNavigator: false).pop(value);
               } else {
-                Navigator.of(context).pop();
+                Navigator.of(context, rootNavigator: false).pop('dialog');
               }
             },
             child: Text(optionTitle, style: textTheme.labelMedium),
