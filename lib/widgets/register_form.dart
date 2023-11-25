@@ -41,8 +41,6 @@ class RegisterForm extends StatelessWidget {
   Widget build(BuildContext context) {
     String? passwordValue;
 
-    print("isLoading $isLoading");
-
     final TextTheme textTheme = Theme.of(context).textTheme;
     final ColorScheme colorScheme = Theme.of(context).colorScheme;
 
