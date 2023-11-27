@@ -9,8 +9,7 @@ import "package:beats_box/widgets/widgets_barrel.dart";
 import 'package:beats_box/services/services_barrel.dart';
 import 'package:beats_box/constants/constants_barrel.dart';
 import 'package:beats_box/utilities/utilities_barrel.dart';
-import 'package:beats_box/bloc/blocs_barrel.dart'
-    show AuthBloc, SignInWithGoogle, AuthState, SignInWithCustomEmail, IsLoggedOut;
+import 'package:beats_box/bloc/blocs_barrel.dart' show AuthBloc, SignInWithGoogle, AuthState, SignInWithCustomEmail;
 
 class LoginView extends StatefulWidget {
   const LoginView({super.key});
@@ -53,7 +52,6 @@ class _LoginViewState extends State<LoginView> {
     super.dispose();
     _emailInputController.dispose();
     _passwordInputController.dispose();
-    setState(() => _isLoading = false);
   }
 
   @override
@@ -91,6 +89,29 @@ class _LoginViewState extends State<LoginView> {
       listener: (context, state) async {
         if (state is AuthenticationFailure) {
           setState(() => _isLoading = false);
+
+          if (state.exception is UserNotFoundAuthException) {
+            showCustomGenericDialog<void>(
+              context: context,
+              title: AppStrings.failed,
+              optionsBuilder: () => {"Ok": null},
+              content: AppStrings.userNotFoundError,
+            );
+          } else if (state.exception is InvalidLoginCredentials) {
+            showCustomGenericDialog<void>(
+              context: context,
+              title: AppStrings.failed,
+              optionsBuilder: () => {"Ok": null},
+              content: AppStrings.invalidLoginCredentialsError,
+            );
+          } else {
+            showCustomGenericDialog<void>(
+              context: context,
+              title: AppStrings.failed,
+              optionsBuilder: () => {"Ok": null},
+              content: AppStrings.somethingWentWrong,
+            );
+          }
         }
       },
       child: Scaffold(
