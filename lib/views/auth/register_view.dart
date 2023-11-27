@@ -57,9 +57,6 @@ class _RegisterViewState extends State<RegisterView> {
   @override
   void dispose() {
     super.dispose();
-
-    setState(() => _isLoading = false);
-
     _emailInputController.dispose();
     _passwordInputController.dispose();
     _fullNameInputController.dispose();
@@ -109,7 +106,7 @@ class _RegisterViewState extends State<RegisterView> {
               optionsBuilder: () => {"Ok": null},
               content: AppStrings.emailAlreadyUsedError,
             );
-          } else if (state.exception is GenericAuthException) {
+          } else {
             showCustomGenericDialog<void>(
               context: context,
               title: AppStrings.failed,
