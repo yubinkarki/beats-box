@@ -5,8 +5,8 @@ import "package:firebase_auth/firebase_auth.dart" show User;
 
 @immutable
 class CustomAuthUser extends Equatable {
-  final String id;
-  final String email;
+  final String? id;
+  final String? email;
   final String? fullName;
 
   const CustomAuthUser({required this.id, required this.email, required this.fullName});
