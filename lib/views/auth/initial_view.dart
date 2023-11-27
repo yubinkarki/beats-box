@@ -1,3 +1,4 @@
+import 'package:beats_box/bloc/auth/auth_barrel.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart' show ReadContext, BlocConsumer;
@@ -10,6 +11,7 @@ import 'package:beats_box/bloc/blocs_barrel.dart'
         AuthState,
         IsLoggedIn,
         IsLoggedOut,
+        Authenticating,
         CheckIsLoggedIn,
         AuthEventInitialize,
         AuthenticationFailure,
@@ -32,7 +34,7 @@ class InitialView extends StatelessWidget {
       builder: (context, state) {
         if (state is IsLoggedIn || state is AuthenticationSuccess) {
           return const HomeView();
-        } else if (state is IsLoggedOut || state is AuthenticationFailure) {
+        } else if (state is IsLoggedOut || state is AuthenticationFailure || state is Authenticating) {
           return const LoginView();
         } else {
           return const Placeholder(color: AppColors.darkTeal);
