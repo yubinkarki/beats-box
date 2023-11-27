@@ -21,16 +21,20 @@ class AppStrings {
   static const String noAccount = "Don't have an account?";
   static const String confirmPassword = "Confirm Password";
   static const String loginToContinue = "Login to continue";
+  static const String wrongPasswordError = "Incorrect password";
   static const String emailAlreadyUsed = "email-already-in-use";
   static const String passwordNoMatch = "Passwords do not match";
   static const String continueWithGoogle = "Continue with Google";
+  static const String userNotFoundError = "Email is not registered";
   static const String emailValidation = "Please enter a valid email";
   static const String alreadyHaveAccount = "Already have an account?";
   static const String emptyConfirmPassword = "Please confirm password";
+  static const String invalidLoginCredentials = "invalid_login_credentials";
   static const String shortPassword = "Should be greater than 8 characters";
   static const String emailAlreadyUsedError = "This email is already in use";
   static const String isLoggedInWriteError = "Error writing logged in value";
   static const String somethingWentWrong = "Something went wrong. Please try again.";
+  static const String invalidLoginCredentialsError = "Invalid login credentials, please try again.";
   static const String accountCreationSuccess = "Account created successfully. Please login to continue.";
 
   static const String emailRegEx =
