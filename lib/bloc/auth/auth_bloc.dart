@@ -5,7 +5,6 @@ import 'package:google_sign_in/google_sign_in.dart' show GoogleSignInAccount;
 import 'package:flutter_secure_storage/flutter_secure_storage.dart' show FlutterSecureStorage;
 
 import 'package:beats_box/bloc/blocs_barrel.dart';
-import 'package:beats_box/services/services_barrel.dart' show getIt;
 import 'package:beats_box/services/services_barrel.dart' show AuthProvider;
 import 'package:beats_box/repositories/repositories_barrel.dart' show AuthRepo;
 import 'package:beats_box/constants/constants_barrel.dart' show LoggedInStatus, AppStrings;
@@ -32,8 +31,6 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   }
 
   Future<void> _checkIsLoggedIn(CheckIsLoggedIn event, Emitter<AuthState> emit) async {
-    final storage = getIt.get<FlutterSecureStorage>();
-
     final String isLoggedInData = await storage.read(key: LoggedInStatus.isLoggedIn.toString()) ?? "false";
 
     if (isLoggedInData == "true") {
@@ -67,11 +64,12 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     await Future.delayed(const Duration(milliseconds: 500));
 
     try {
-      await provider
-          .logIn(email: event.email, password: event.password)
-          .then((value) => emit(const AuthenticationSuccess()));
+      await provider.logIn(email: event.email, password: event.password).then((value) async {
+        await storage.write(key: LoggedInStatus.isLoggedIn.toString(), value: "true");
 
-      emit(const Authenticating(isLoading: false));
+        emit(const Authenticating(isLoading: false));
+        emit(const AuthenticationSuccess());
+      });
     } on Exception catch (e) {
       emit(const Authenticating(isLoading: false));
       emit(AuthenticationFailure(AppStrings.somethingWentWrong, e));
