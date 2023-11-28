@@ -1,9 +1,12 @@
+import 'dart:convert' show json;
+
 import "package:firebase_core/firebase_core.dart" show Firebase;
 import "package:firebase_auth/firebase_auth.dart" show FirebaseAuth, FirebaseAuthException;
 
 import 'package:beats_box/services/authentication/auth_exceptions.dart';
 import 'package:beats_box/models/models_barrel.dart' show CustomAuthUser;
 import 'package:beats_box/constants/constants_barrel.dart' show AppStrings;
+import 'package:beats_box/services/services_barrel.dart' show SharedPreferencesHelper;
 import 'package:beats_box/utilities/utilities_barrel.dart' show DefaultFirebaseOptions;
 import 'package:beats_box/services/authentication/auth_provider.dart' show AuthProvider;
 
@@ -29,11 +32,20 @@ class FirebaseAuthProvider implements AuthProvider {
     try {
       final result = await FirebaseAuth.instance.signInWithEmailAndPassword(email: email, password: password);
 
-      print("this is login result in provider $result");
+      Map<String, String?> customUserData = {
+        "email": result.user?.email,
+        "photoUrl": result.user?.photoURL,
+        "phoneNumber": result.user?.phoneNumber,
+        "displayName": result.user?.displayName.toString(),
+      };
+
+      String encodedCustomUserData = json.encode(customUserData);
 
       final user = currentUser;
 
       if (user != null) {
+        SharedPreferencesHelper.setCustomEmailUserDetails(encodedCustomUserData);
+
         return user;
       } else {
         throw UserNotLoggedInAuthException();
@@ -43,6 +55,8 @@ class FirebaseAuthProvider implements AuthProvider {
         throw UserNotFoundAuthException();
       } else if (e.code == AppStrings.wrongPassword) {
         throw WrongPasswordAuthException();
+      } else if (e.code == AppStrings.invalidLoginCredentials.toUpperCase()) {
+        throw InvalidLoginCredentials();
       } else {
         throw GenericAuthException();
       }

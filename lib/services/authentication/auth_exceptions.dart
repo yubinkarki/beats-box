@@ -17,3 +17,5 @@ class UserNotLoggedInAuthException implements Exception {}
 
 // For test cases.
 class NotInitializedException implements Exception {}
+
+class InvalidLoginCredentials implements Exception {}
