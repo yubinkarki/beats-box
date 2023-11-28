@@ -156,9 +156,7 @@ class RegisterForm extends StatelessWidget {
                 : SizedBox(
                     height: AppSizes.s44,
                     width: AppSizes.s100,
-                    child: Center(
-                      child: Text(AppStrings.register, style: textTheme.labelMedium),
-                    ),
+                    child: Center(child: Text(AppStrings.register, style: textTheme.labelMedium)),
                   ),
           )
         ],

@@ -88,12 +88,11 @@ class LoginForm extends StatelessWidget {
               backgroundColor: AppColors.purpleMain,
               padding: const EdgeInsets.symmetric(vertical: AppPaddings.p8, horizontal: AppPaddings.p20),
             ),
-            // child: Text(AppStrings.login, style: textTheme.labelMedium),
             child: isLoading
                 ? Container(
-                    height: AppSizes.s44,
-                    width: AppSizes.s100,
-                    padding: const EdgeInsets.symmetric(horizontal: AppPaddings.p40, vertical: AppPaddings.p12),
+                    width: AppSizes.s80,
+                    height: AppSizes.s34,
+                    padding: const EdgeInsets.symmetric(horizontal: AppPaddings.p29, vertical: AppPaddings.p6),
                     child: Center(
                       child: Platform.isIOS
                           ? const CupertinoActivityIndicator(radius: AppSizes.s12, color: AppColors.white)
@@ -101,11 +100,9 @@ class LoginForm extends StatelessWidget {
                     ),
                   )
                 : SizedBox(
-                    height: AppSizes.s44,
-                    width: AppSizes.s100,
-                    child: Center(
-                      child: Text(AppStrings.register, style: textTheme.labelMedium),
-                    ),
+                    width: AppSizes.s80,
+                    height: AppSizes.s34,
+                    child: Center(child: Text(AppStrings.login, style: textTheme.labelMedium)),
                   ),
           )
         ],
