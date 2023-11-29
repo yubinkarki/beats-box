@@ -12,7 +12,10 @@ class AppColors {
   static const Color purpleMain = Color.fromRGBO(81, 22, 130, 1.0);
   static const Color lightTeal = Color.fromRGBO(236, 255, 253, 1.0);
   static const Color slightlyDark = Color.fromRGBO(38, 38, 38, 1.0);
+  static const Color slightlyDarker = Color.fromRGBO(31, 31, 31, 1);
   static const Color translucentBlack = Color.fromRGBO(0, 0, 0, 0.8);
+  static const Color slightlyDarkTeal = Color.fromRGBO(29, 58, 55, 1);
+  static const Color lessLightTeal = Color.fromRGBO(197, 231, 228, 1);
   static const Color purpleOutline = Color.fromRGBO(127, 38, 178, 1.0);
   static const Color transparentBlack = Color.fromRGBO(0, 0, 0, 0.002);
   static const Color slightlyWhite = Color.fromRGBO(242, 242, 242, 1.0);
