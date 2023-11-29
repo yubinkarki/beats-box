@@ -67,10 +67,6 @@ class _LoginViewState extends State<LoginView> {
       final String email = _emailInputController.text;
       final String password = _passwordInputController.text;
 
-      await customMiliDelay(300);
-
-      if (!context.mounted) return;
-
       if (_loginFormKey.currentState?.validate() ?? false) {
         setState(() => _isLoading = true);
         authBloc.add(SignInWithCustomEmail(email, password));
