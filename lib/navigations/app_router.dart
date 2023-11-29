@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:beats_box/views/views_barrel.dart';
-import 'package:beats_box/constants/constants_barrel.dart';
+import 'package:beats_box/constants/constants_barrel.dart' show AppRoutes;
 
 class AppRouter {
   static Route<dynamic> getRoute(RouteSettings routes) {
