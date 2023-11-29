@@ -19,6 +19,8 @@ ThemeData darkTheme(BuildContext context) {
       outline: AppColors.purpleOutline,
       primary: AppColors.slightlyWhite,
       background: AppColors.slightlyDark,
+      secondary: AppColors.slightlyDarker,
+      secondaryContainer: AppColors.lightTeal,
     ),
     textTheme: darkTextTheme(base.textTheme),
   );

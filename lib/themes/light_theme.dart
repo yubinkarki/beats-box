@@ -19,6 +19,8 @@ ThemeData lightTheme(BuildContext context) {
       primary: AppColors.teal,
       background: AppColors.lightTeal,
       outline: AppColors.purpleOutline,
+      secondary: AppColors.lessLightTeal,
+      secondaryContainer: AppColors.slightlyDarkTeal,
     ),
     textTheme: lightTextTheme(base.textTheme),
   );
