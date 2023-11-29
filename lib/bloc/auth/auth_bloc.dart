@@ -50,11 +50,9 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         debugPrint("This is google date: $googleToken $googleUserData");
         await storage.write(key: LoggedInStatus.isLoggedIn.toString(), value: "true");
         emit(const AuthenticationSuccess());
-      } else {
-        emit(const AuthenticationFailure(AppStrings.loginCancelled, null));
       }
     } on Exception catch (e) {
-      emit(AuthenticationFailure(AppStrings.somethingWentWrong, e));
+      debugPrint(e.toString());
     }
   }
 
@@ -78,6 +76,8 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
   Future<void> _registerWithCustomEmail(RegisterWithCustomEmail event, Emitter<AuthState> emit) async {
     emit(const Authenticating(isLoading: true));
+
+    await Future.delayed(const Duration(milliseconds: 500));
 
     try {
       await provider.signUp(email: event.email, password: event.password, fullName: event.fullName).then((value) {
