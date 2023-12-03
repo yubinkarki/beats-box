@@ -9,7 +9,7 @@ import 'package:beats_box/bloc/auth/auth_state.dart' show AccountCreationSuccess
 import "package:beats_box/utilities/utilities_barrel.dart" show customMiliDelay, showCustomGenericDialog;
 import 'package:beats_box/constants/constants_barrel.dart' show AppStrings, AppPaddings, CustomImages, AppSizes;
 import 'package:beats_box/services/services_barrel.dart'
-    show DoubleExtension, EmailAlreadyUsedAuthException, StringExtension, GenericAuthException;
+    show DoubleExtension, EmailAlreadyUsedAuthException, StringExtension;
 
 class RegisterView extends StatefulWidget {
   const RegisterView({super.key});
