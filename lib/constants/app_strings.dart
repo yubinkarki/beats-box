@@ -3,6 +3,7 @@ class AppStrings {
   static const String empty = "";
   static const String login = "Login";
   static const String email = "Email";
+  static const String logout = "Logout";
   static const String failed = "Failed";
   static const String success = "Success";
   static const String welcome = "Welcome";
@@ -11,6 +12,7 @@ class AppStrings {
   static const String password = "Password";
   static const String appName = "Beats Box";
   static const String fullName = "Full Name";
+  static const String areYouSure = "Are you sure?";
   static const String shortValidation = "Too short";
   static const String invalidEmail = "invalid-email";
   static const String weakPassword = "weak-password";
@@ -33,6 +35,7 @@ class AppStrings {
   static const String shortPassword = "Should be greater than 8 characters";
   static const String emailAlreadyUsedError = "This email is already in use";
   static const String isLoggedInWriteError = "Error writing logged in value";
+  static const String logoutMessage = "This will take you to the login screen.";
   static const String somethingWentWrong = "Something went wrong. Please try again.";
   static const String invalidLoginCredentialsError = "Invalid login credentials, please try again.";
   static const String accountCreationSuccess = "Account created successfully. Please login to continue.";
