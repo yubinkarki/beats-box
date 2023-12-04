@@ -1,48 +1,33 @@
 import 'package:flutter/material.dart';
 
+import 'package:beats_box/services/services_barrel.dart' show DoubleExtension;
 import 'package:beats_box/utilities/utilities_barrel.dart' show showCustomGenericDialog;
-import 'package:beats_box/services/services_barrel.dart' show DoubleExtension, SharedPreferencesHelper;
 import 'package:beats_box/constants/constants_barrel.dart'
-    show AppSizes, AppColors, CustomImages, AppStrings, AppMargins, AppPaddings;
+    show AppSizes, AppColors, CustomImages, AppStrings, AppMargins, AppPaddings, CustomUserDetails;
 
-class ProfileView extends StatefulWidget {
-  const ProfileView({super.key});
+class ProfileView extends StatelessWidget {
+  final Map<String, dynamic>? userData;
 
-  @override
-  State<ProfileView> createState() => _ProfileViewState();
-}
+  const ProfileView({super.key, this.userData});
 
-class _ProfileViewState extends State<ProfileView> {
-  late Map<String, dynamic> customUserData;
-
-  @override
-  void initState() {
-    super.initState();
-    getCustomUserData();
-  }
-
-  Future<void> getCustomUserData() async {
-    customUserData = await SharedPreferencesHelper.getCustomEmailUserDetails();
-  }
-
-  void handleLogout() {
+  void handleLogout(context) {
     showCustomGenericDialog<void>(
       context: context,
       title: AppStrings.areYouSure,
       content: AppStrings.logoutMessage,
-      optionsBuilder: () => {"Ok": null},
+      optionsBuilder: () => {"Ok": null, "Cancel": null},
     );
   }
 
-  @override
-  Widget build(BuildContext context) {
-    Future.delayed(const Duration(seconds: 1), () {
-      print("this is user data in profile view $customUserData");
-    });
-
-    final TextTheme textTheme = Theme.of(context).textTheme;
-    final ColorScheme colorScheme = Theme.of(context).colorScheme;
-
+  Scaffold profileContent({
+    String? email,
+    String? location,
+    String? phoneNumber,
+    String? displayName,
+    required TextTheme textTheme,
+    required BuildContext context,
+    required ColorScheme colorScheme,
+  }) {
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: AppSizes.s250,
@@ -74,15 +59,15 @@ class _ProfileViewState extends State<ProfileView> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text("Yubin Karki", style: textTheme.titleLarge),
+                        Text(displayName ?? AppStrings.defaultName, style: textTheme.titleLarge),
                         AppSizes.s10.sizedBoxHeight,
                         Row(
                           children: [
-                            Text("10 Followers", style: textTheme.labelSmall),
+                            Text("10 ${AppStrings.followers}", style: textTheme.labelSmall),
                             AppSizes.s6.sizedBoxWidth,
                             const Icon(Icons.circle, size: AppSizes.s6),
                             AppSizes.s6.sizedBoxWidth,
-                            Text("10 Following", style: textTheme.labelSmall),
+                            Text("10 ${AppStrings.following}", style: textTheme.labelSmall),
                           ],
                         ),
                       ],
@@ -111,13 +96,25 @@ class _ProfileViewState extends State<ProfileView> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text("Name - Yubin Karki", style: textTheme.labelMedium),
+                      Text(
+                        "${AppStrings.name} - ${displayName ?? AppStrings.defaultName}",
+                        style: textTheme.labelMedium,
+                      ),
                       AppSizes.s10.sizedBoxHeight,
-                      Text("Name - Bhaktapur", style: textTheme.labelMedium),
+                      Text(
+                        "${AppStrings.location} - ${location ?? AppStrings.defaultLocation}",
+                        style: textTheme.labelMedium,
+                      ),
                       AppSizes.s10.sizedBoxHeight,
-                      Text("Name - Nice", style: textTheme.labelMedium),
+                      Text(
+                        "${AppStrings.email} - ${email ?? AppStrings.defaultEmail}",
+                        style: textTheme.labelMedium,
+                      ),
                       AppSizes.s10.sizedBoxHeight,
-                      Text("Name - Yubin Karki", style: textTheme.labelMedium),
+                      Text(
+                        "${AppStrings.contact} - ${phoneNumber ?? AppStrings.defaultPhone}",
+                        style: textTheme.labelMedium,
+                      ),
                     ],
                   ),
                 ),
@@ -128,7 +125,7 @@ class _ProfileViewState extends State<ProfileView> {
               height: AppSizes.s50,
               width: AppSizes.s150,
               child: OutlinedButton(
-                onPressed: handleLogout,
+                onPressed: () => handleLogout(context),
                 child: Text(AppStrings.logout, style: textTheme.labelSmall),
               ),
             ),
@@ -136,6 +133,22 @@ class _ProfileViewState extends State<ProfileView> {
           ],
         ),
       ),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final TextTheme textTheme = Theme.of(context).textTheme;
+    final ColorScheme colorScheme = Theme.of(context).colorScheme;
+
+    return profileContent(
+      context: context,
+      textTheme: textTheme,
+      colorScheme: colorScheme,
+      email: userData?[CustomUserDetails.email.toString()],
+      location: userData?[CustomUserDetails.location.toString()],
+      displayName: userData?[CustomUserDetails.displayName.toString()],
+      phoneNumber: userData?[CustomUserDetails.phoneNumber.toString()],
     );
   }
 }
