@@ -18,6 +18,8 @@ class AppStrings {
   static const String password = "Password";
   static const String appName = "Beats Box";
   static const String fullName = "Full Name";
+  static const String followers = "Followers";
+  static const String following = "Following";
   static const String favorites = "Favorites";
   static const String defaultName = "Full Name";
   static const String defaultPhone = "0000000000";
