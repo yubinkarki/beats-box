@@ -6,7 +6,8 @@ import 'library_view.dart' show LibraryView;
 import 'profile_view.dart' show ProfileView;
 import 'dashboard_view.dart' show DashboardView;
 import 'favorites_view.dart' show FavoritesView;
-import 'package:beats_box/constants/app_sizes.dart' show AppSizes;
+import 'package:beats_box/constants/constants_barrel.dart' show AppSizes, AppStrings;
+import 'package:beats_box/services/services_barrel.dart' show SharedPreferencesHelper;
 
 class HomeView extends StatefulWidget {
   const HomeView({super.key});
@@ -17,13 +18,38 @@ class HomeView extends StatefulWidget {
 
 class _HomeViewState extends State<HomeView> {
   int _currentIndex = 0;
+  late final Map<String, dynamic> userData;
 
-  final List<Widget> screens = const [
-    DashboardView(),
-    LibraryView(),
-    FavoritesView(),
-    ProfileView(),
-  ];
+  @override
+  void initState() {
+    super.initState();
+    getCustomUserData();
+  }
+
+  Widget getScreens(currentIndex) {
+    switch (currentIndex) {
+      case 0:
+        return const DashboardView();
+
+      case 1:
+        return const LibraryView();
+
+      case 2:
+        return const FavoritesView();
+
+      case 3:
+        return ProfileView(userData: userData);
+
+      default:
+        return const Placeholder();
+    }
+  }
+
+  Future<void> getCustomUserData() async {
+    final result = await SharedPreferencesHelper.getCustomEmailUserDetails();
+
+    setState(() => userData = result);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +58,7 @@ class _HomeViewState extends State<HomeView> {
     final ColorScheme colorScheme = Theme.of(context).colorScheme;
 
     return Scaffold(
-      body: screens[_currentIndex],
+      body: getScreens(_currentIndex),
       bottomNavigationBar: BottomNavigationBar(
         iconSize: AppSizes.s26,
         showUnselectedLabels: false,
@@ -44,22 +70,22 @@ class _HomeViewState extends State<HomeView> {
         currentIndex: _currentIndex,
         items: const [
           BottomNavigationBarItem(
-            label: "Home",
+            label: AppStrings.home,
             activeIcon: Icon(Icons.cottage),
             icon: Icon(Icons.cottage_outlined),
           ),
           BottomNavigationBarItem(
-            label: "Library",
+            label: AppStrings.library,
             activeIcon: Icon(Icons.library_music),
             icon: Icon(Icons.library_music_outlined),
           ),
           BottomNavigationBarItem(
-            label: "Favorites",
+            label: AppStrings.favorites,
             activeIcon: Icon(Icons.favorite),
             icon: Icon(Icons.favorite_border),
           ),
           BottomNavigationBarItem(
-            label: "Profile",
+            label: AppStrings.profile,
             activeIcon: Icon(Icons.person_4),
             icon: Icon(Icons.person_4_outlined),
           ),
