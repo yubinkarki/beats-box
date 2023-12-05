@@ -90,21 +90,21 @@ class _LoginViewState extends State<LoginView> {
             showCustomGenericDialog<void>(
               context: context,
               title: AppStrings.failed,
-              optionsBuilder: () => {"Ok": null},
+              optionsBuilder: () => {AppStrings.ok.toUpperCase(): null},
               content: AppStrings.userNotFoundError,
             );
           } else if (state.exception is InvalidLoginCredentials) {
             showCustomGenericDialog<void>(
               context: context,
               title: AppStrings.failed,
-              optionsBuilder: () => {"Ok": null},
+              optionsBuilder: () => {AppStrings.ok.toUpperCase(): null},
               content: AppStrings.invalidLoginCredentialsError,
             );
           } else {
             showCustomGenericDialog<void>(
               context: context,
               title: AppStrings.failed,
-              optionsBuilder: () => {"Ok": null},
+              optionsBuilder: () => {AppStrings.ok.toUpperCase(): null},
               content: AppStrings.somethingWentWrong,
             );
           }

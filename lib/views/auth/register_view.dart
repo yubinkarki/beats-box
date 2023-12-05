@@ -94,7 +94,7 @@ class _RegisterViewState extends State<RegisterView> {
             context: context,
             title: AppStrings.success,
             content: AppStrings.accountCreationSuccess,
-            optionsBuilder: () => {"Ok": null},
+            optionsBuilder: () => {AppStrings.ok.toUpperCase(): null},
           );
         } else if (state is AuthenticationFailure) {
           setState(() => _isLoading = false);
@@ -103,14 +103,14 @@ class _RegisterViewState extends State<RegisterView> {
             showCustomGenericDialog<void>(
               context: context,
               title: AppStrings.failed,
-              optionsBuilder: () => {"Ok": null},
+              optionsBuilder: () => {AppStrings.ok.toUpperCase(): null},
               content: AppStrings.emailAlreadyUsedError,
             );
           } else {
             showCustomGenericDialog<void>(
               context: context,
               title: AppStrings.failed,
-              optionsBuilder: () => {"Ok": null},
+              optionsBuilder: () => {AppStrings.ok.toUpperCase(): null},
               content: AppStrings.somethingWentWrong,
             );
           }
