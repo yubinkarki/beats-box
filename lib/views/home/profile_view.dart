@@ -10,12 +10,19 @@ class ProfileView extends StatelessWidget {
 
   const ProfileView({super.key, this.userData});
 
-  void handleLogout(context) {
+  void handleLogout() {
+    print("Logged out");
+  }
+
+  void showLogoutDialog(context) {
     showCustomGenericDialog<void>(
       context: context,
       title: AppStrings.areYouSure,
       content: AppStrings.logoutMessage,
-      optionsBuilder: () => {"Ok": null, "Cancel": null},
+      optionsBuilder: () => {
+        AppStrings.yes: handleLogout,
+        AppStrings.no: null,
+      },
     );
   }
 
@@ -125,7 +132,7 @@ class ProfileView extends StatelessWidget {
               height: AppSizes.s50,
               width: AppSizes.s150,
               child: OutlinedButton(
-                onPressed: () => handleLogout(context),
+                onPressed: () => showLogoutDialog(context),
                 child: Text(AppStrings.logout, style: textTheme.labelSmall),
               ),
             ),
