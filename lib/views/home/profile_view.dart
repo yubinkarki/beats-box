@@ -11,7 +11,7 @@ class ProfileView extends StatelessWidget {
   const ProfileView({super.key, this.userData});
 
   void handleLogout() {
-    print("Logged out");
+    // print("Logged out");
   }
 
   void showLogoutDialog(context) {
