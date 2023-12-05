@@ -1,10 +1,14 @@
 class AppStrings {
   static const String or = "OR";
+  static const String no = "No";
+  static const String ok = "Ok";
   static const String empty = "";
+  static const String yes = "Yes";
   static const String name = "Name";
   static const String home = "Home";
   static const String login = "Login";
   static const String email = "Email";
+  static const String dialog = "dialog";
   static const String logout = "Logout";
   static const String failed = "Failed";
   static const String library = "Library";
@@ -13,6 +17,7 @@ class AppStrings {
   static const String success = "Success";
   static const String welcome = "Welcome";
   static const String appTitle = "Beat It";
+  static const String photoUrl = "photoUrl";
   static const String register = "Register";
   static const String location = "Location";
   static const String password = "Password";
@@ -22,7 +27,9 @@ class AppStrings {
   static const String following = "Following";
   static const String favorites = "Favorites";
   static const String defaultName = "Full Name";
+  static const String displayName = "displayName";
   static const String defaultPhone = "0000000000";
+  static const String phoneNumber = "phoneNumber";
   static const String areYouSure = "Are you sure?";
   static const String shortValidation = "Too short";
   static const String invalidEmail = "invalid-email";
