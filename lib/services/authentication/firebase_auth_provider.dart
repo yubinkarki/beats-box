@@ -33,10 +33,10 @@ class FirebaseAuthProvider implements AuthProvider {
       final result = await FirebaseAuth.instance.signInWithEmailAndPassword(email: email, password: password);
 
       Map<String, String?> customUserData = {
-        "email": result.user?.email,
-        "photoUrl": result.user?.photoURL,
-        "phoneNumber": result.user?.phoneNumber,
-        "displayName": result.user?.displayName.toString(),
+        AppStrings.email: result.user?.email,
+        AppStrings.photoUrl: result.user?.photoURL,
+        AppStrings.phoneNumber: result.user?.phoneNumber,
+        AppStrings.displayName: result.user?.displayName.toString(),
       };
 
       String encodedCustomUserData = json.encode(customUserData);
