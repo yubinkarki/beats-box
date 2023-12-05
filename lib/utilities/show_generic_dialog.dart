@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'package:beats_box/constants/constants_barrel.dart' show AppStrings;
+
 typedef DialogOptionBuilder<T> = Map<String, T?> Function();
 
 Future<T?> showCustomGenericDialog<T>({
@@ -23,9 +25,9 @@ Future<T?> showCustomGenericDialog<T>({
           return TextButton(
             onPressed: () {
               if (value != null) {
-                Navigator.of(context, rootNavigator: false).pop(value);
+                options[optionTitle]();
               } else {
-                Navigator.of(context, rootNavigator: false).pop('dialog');
+                Navigator.of(context).pop(AppStrings.dialog);
               }
             },
             child: Text(optionTitle, style: textTheme.labelMedium),
