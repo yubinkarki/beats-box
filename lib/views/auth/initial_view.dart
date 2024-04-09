@@ -1,4 +1,3 @@
-import 'package:beats_box/bloc/auth/auth_barrel.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart' show ReadContext, BlocConsumer;

@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' show debugPrint;
 
 import 'package:bloc/bloc.dart' show Bloc, Emitter;
 import 'package:google_sign_in/google_sign_in.dart' show GoogleSignInAccount;
@@ -47,7 +47,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       final googleToken = googleSignInAuthentication?.accessToken;
 
       if (googleToken != null) {
-        debugPrint("This is google date: $googleToken $googleUserData");
+        debugPrint("This is google data: $googleToken $googleUserData");
         await storage.write(key: LoggedInStatus.isLoggedIn.toString(), value: "true");
         emit(const AuthenticationSuccess());
       }

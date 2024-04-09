@@ -1,4 +1,4 @@
-import 'package:flutter/foundation.dart';
+import 'package:flutter/foundation.dart' show immutable;
 
 import 'package:beats_box/models/models_barrel.dart' show CustomAuthUser, GoogleUser;
 

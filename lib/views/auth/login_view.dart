@@ -1,15 +1,17 @@
-import 'package:beats_box/bloc/auth/auth_barrel.dart';
 import 'package:flutter/material.dart';
 
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_native_splash/flutter_native_splash.dart';
+import 'package:flutter_bloc/flutter_bloc.dart' show BlocProvider, BlocListener;
+import 'package:flutter_native_splash/flutter_native_splash.dart' show FlutterNativeSplash;
 
-import 'package:beats_box/globals/globals_barrel.dart';
-import "package:beats_box/widgets/widgets_barrel.dart";
-import 'package:beats_box/services/services_barrel.dart';
-import 'package:beats_box/constants/constants_barrel.dart';
-import 'package:beats_box/utilities/utilities_barrel.dart';
-import 'package:beats_box/bloc/blocs_barrel.dart' show AuthBloc, SignInWithGoogle, AuthState, SignInWithCustomEmail;
+import 'package:beats_box/utilities/utilities_barrel.dart' show showCustomGenericDialog;
+import 'package:beats_box/globals/globals_barrel.dart' show LoadingOverlay, GlobalMediaQuery;
+import "package:beats_box/widgets/widgets_barrel.dart" show LoginForm, customHorizontalLine, SocialLoginButton;
+import 'package:beats_box/constants/constants_barrel.dart'
+    show AppStrings, AppPaddings, CustomImages, AppSizes, AppRoutes;
+import 'package:beats_box/services/services_barrel.dart'
+    show getIt, DoubleExtension, UserNotFoundAuthException, InvalidLoginCredentials;
+import 'package:beats_box/bloc/blocs_barrel.dart'
+    show AuthBloc, SignInWithGoogle, AuthState, SignInWithCustomEmail, AuthenticationFailure;
 
 class LoginView extends StatefulWidget {
   const LoginView({super.key});
@@ -143,10 +145,10 @@ class _LoginViewState extends State<LoginView> {
                     padding: const EdgeInsets.symmetric(horizontal: AppPaddings.p20),
                     child: SocialLoginButton(
                       textTheme: textTheme,
+                      onPressed: handleGoogleLogin,
                       buttonIcon: CustomImages.googleLogo,
                       buttonColor: colorScheme.background,
                       buttonText: AppStrings.continueWithGoogle,
-                      onPressed: handleGoogleLogin,
                     ),
                   ),
                   const Spacer(),
