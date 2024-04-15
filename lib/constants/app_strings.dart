@@ -57,6 +57,7 @@ class AppStrings {
   static const String shortPassword = "Should be greater than 8 characters";
   static const String emailAlreadyUsedError = "This email is already in use";
   static const String isLoggedInWriteError = "Error writing logged in value";
+  static const String failedToCreateAccount = "Failed to create a new account";
   static const String logoutMessage = "This will take you to the login screen.";
   static const String somethingWentWrong = "Something went wrong. Please try again.";
   static const String invalidLoginCredentialsError = "Invalid login credentials, please try again.";
