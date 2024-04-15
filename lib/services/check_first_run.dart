@@ -9,11 +9,11 @@ final pref = getIt.get<SharedPreferences>();
 final storage = getIt.get<FlutterSecureStorage>();
 
 Future<void> checkFirstRun() async {
-  final bool? firstRun = pref.getBool(SharedUser.firstRun.toString());
+  final bool firstRun = pref.getBool(SharedUser.firstRun.toString()) ?? false;
 
   debugPrint("This is check first run $firstRun");
 
-  if (firstRun ?? true) {
+  if (firstRun) {
     debugPrint("This is running because first run.");
 
     await storage.delete(key: LoggedInStatus.isLoggedIn.toString());

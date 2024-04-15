@@ -1,3 +1,4 @@
+export "mixins.dart";
 export "locator.dart";
 export "system_ui.dart";
 export "extensions.dart";
