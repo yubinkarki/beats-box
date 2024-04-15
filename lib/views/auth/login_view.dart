@@ -6,10 +6,10 @@ import 'package:flutter_native_splash/flutter_native_splash.dart' show FlutterNa
 import 'package:beats_box/utilities/utilities_barrel.dart' show showCustomGenericDialog;
 import 'package:beats_box/globals/globals_barrel.dart' show LoadingOverlay, GlobalMediaQuery;
 import "package:beats_box/widgets/widgets_barrel.dart" show LoginForm, customHorizontalLine, SocialLoginButton;
-import 'package:beats_box/constants/constants_barrel.dart'
-    show AppStrings, AppPaddings, CustomImages, AppSizes, AppRoutes;
 import 'package:beats_box/services/services_barrel.dart'
-    show getIt, DoubleExtension, UserNotFoundAuthException, InvalidLoginCredentials;
+    show getIt, DoubleExtension, InvalidLoginCredentials, SnackMessengerMixin;
+import 'package:beats_box/constants/constants_barrel.dart'
+    show AppStrings, AppPaddings, CustomImages, AppSizes, AppRoutes, AppColors;
 import 'package:beats_box/bloc/blocs_barrel.dart'
     show AuthBloc, SignInWithGoogle, AuthState, SignInWithCustomEmail, AuthenticationFailure;
 
@@ -20,17 +20,17 @@ class LoginView extends StatefulWidget {
   State<LoginView> createState() => _LoginViewState();
 }
 
-class _LoginViewState extends State<LoginView> {
+class _LoginViewState extends State<LoginView> with SnackMessengerMixin {
   bool _isLoading = false;
   bool _passwordVisible = false;
 
   final _loginFormKey = GlobalKey<FormState>();
+  final loadingOverlay = getIt.get<LoadingOverlay>();
+
   late final TextEditingController _emailInputController;
   late final TextEditingController _passwordInputController;
 
   AutovalidateMode _autoValidate = AutovalidateMode.disabled;
-
-  final loadingOverlay = getIt.get<LoadingOverlay>();
 
   @override
   void initState() {
@@ -61,7 +61,6 @@ class _LoginViewState extends State<LoginView> {
     FlutterNativeSplash.remove();
 
     final authBloc = BlocProvider.of<AuthBloc>(context);
-
     final TextTheme textTheme = Theme.of(context).textTheme;
     final ColorScheme colorScheme = Theme.of(context).colorScheme;
 
@@ -88,26 +87,31 @@ class _LoginViewState extends State<LoginView> {
         if (state is AuthenticationFailure) {
           setState(() => _isLoading = false);
 
-          if (state.exception is UserNotFoundAuthException) {
-            showCustomGenericDialog<void>(
-              context: context,
-              title: AppStrings.failed,
-              optionsBuilder: () => {AppStrings.ok.toUpperCase(): null},
-              content: AppStrings.userNotFoundError,
-            );
-          } else if (state.exception is InvalidLoginCredentials) {
-            showCustomGenericDialog<void>(
-              context: context,
-              title: AppStrings.failed,
-              optionsBuilder: () => {AppStrings.ok.toUpperCase(): null},
-              content: AppStrings.invalidLoginCredentialsError,
+          if (state.exception is InvalidLoginCredentials) {
+            messenger.showSnackBar(
+              actionLabel: AppStrings.details,
+              message: AppStrings.invalidLoginCredentialsError,
+              onActionPressed: () {
+                showCustomGenericDialog<void>(
+                  context: context,
+                  title: AppStrings.failedToLogin,
+                  content: AppStrings.invalidLoginCredentialsError,
+                  optionsBuilder: () => {AppStrings.ok.toUpperCase(): null},
+                );
+              },
             );
           } else {
-            showCustomGenericDialog<void>(
-              context: context,
-              title: AppStrings.failed,
-              optionsBuilder: () => {AppStrings.ok.toUpperCase(): null},
-              content: AppStrings.somethingWentWrong,
+            messenger.showSnackBar(
+              actionLabel: AppStrings.details,
+              message: AppStrings.somethingWentWrong,
+              onActionPressed: () {
+                showCustomGenericDialog<void>(
+                  context: context,
+                  title: AppStrings.failedToLogin,
+                  content: AppStrings.somethingWentWrong,
+                  optionsBuilder: () => {AppStrings.ok.toUpperCase(): null},
+                );
+              },
             );
           }
         }
@@ -152,11 +156,17 @@ class _LoginViewState extends State<LoginView> {
                     ),
                   ),
                   const Spacer(),
-                  Text(AppStrings.noAccount, style: textTheme.labelSmall),
+                  Text(
+                    AppStrings.noAccount,
+                    style: textTheme.labelSmall!.copyWith(color: AppColors.slightlyWhite),
+                  ),
                   AppSizes.s6.sizedBoxHeight,
                   OutlinedButton(
                     onPressed: handleNavToRegister,
-                    child: Text(AppStrings.register, style: textTheme.labelSmall),
+                    child: Text(
+                      AppStrings.register,
+                      style: textTheme.labelSmall!.copyWith(color: AppColors.slightlyWhite),
+                    ),
                   ),
                   AppSizes.s20.sizedBoxHeight,
                 ],

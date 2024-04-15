@@ -7,9 +7,10 @@ import 'package:beats_box/globals/globals_barrel.dart' show GlobalMediaQuery;
 import 'package:beats_box/bloc/blocs_barrel.dart' show AuthBloc, AuthState, RegisterWithCustomEmail;
 import 'package:beats_box/bloc/auth/auth_state.dart' show AccountCreationSuccess, AuthenticationFailure;
 import "package:beats_box/utilities/utilities_barrel.dart" show customMiliDelay, showCustomGenericDialog;
-import 'package:beats_box/constants/constants_barrel.dart' show AppStrings, AppPaddings, CustomImages, AppSizes;
+import 'package:beats_box/constants/constants_barrel.dart'
+    show AppStrings, AppPaddings, CustomImages, AppSizes, AppColors;
 import 'package:beats_box/services/services_barrel.dart'
-    show DoubleExtension, EmailAlreadyUsedAuthException, StringExtension;
+    show DoubleExtension, EmailAlreadyUsedAuthException, StringExtension, SnackMessengerMixin;
 
 class RegisterView extends StatefulWidget {
   const RegisterView({super.key});
@@ -18,7 +19,7 @@ class RegisterView extends StatefulWidget {
   State<RegisterView> createState() => _RegisterViewState();
 }
 
-class _RegisterViewState extends State<RegisterView> {
+class _RegisterViewState extends State<RegisterView> with SnackMessengerMixin {
   bool _isLoading = false;
   bool _passwordVisible = false;
   bool _confirmPasswordVisible = false;
@@ -90,28 +91,39 @@ class _RegisterViewState extends State<RegisterView> {
         if (state is AccountCreationSuccess) {
           setState(() => _isLoading = false);
 
-          showCustomGenericDialog<void>(
-            context: context,
-            title: AppStrings.success,
-            content: AppStrings.accountCreationSuccess,
-            optionsBuilder: () => {AppStrings.ok.toUpperCase(): null},
+          messenger.showSnackBar(
+            actionLabel: AppStrings.ok,
+            message: AppStrings.accountCreationSuccess,
+            onActionPressed: () => handleBackToLogin(),
           );
         } else if (state is AuthenticationFailure) {
           setState(() => _isLoading = false);
 
           if (state.exception is EmailAlreadyUsedAuthException) {
-            showCustomGenericDialog<void>(
-              context: context,
-              title: AppStrings.failed,
-              optionsBuilder: () => {AppStrings.ok.toUpperCase(): null},
-              content: AppStrings.emailAlreadyUsedError,
+            messenger.showSnackBar(
+              actionLabel: AppStrings.details,
+              message: AppStrings.emailAlreadyUsedError,
+              onActionPressed: () {
+                showCustomGenericDialog<void>(
+                  context: context,
+                  title: AppStrings.failedToCreateAccount,
+                  optionsBuilder: () => {AppStrings.ok.toUpperCase(): null},
+                  content: AppStrings.emailAlreadyUsedError,
+                );
+              },
             );
           } else {
-            showCustomGenericDialog<void>(
-              context: context,
-              title: AppStrings.failed,
-              optionsBuilder: () => {AppStrings.ok.toUpperCase(): null},
-              content: AppStrings.somethingWentWrong,
+            messenger.showSnackBar(
+              actionLabel: AppStrings.details,
+              message: AppStrings.somethingWentWrong,
+              onActionPressed: () {
+                showCustomGenericDialog<void>(
+                  context: context,
+                  title: AppStrings.failedToLogin,
+                  content: AppStrings.somethingWentWrong,
+                  optionsBuilder: () => {AppStrings.ok.toUpperCase(): null},
+                );
+              },
             );
           }
         }
@@ -147,11 +159,19 @@ class _RegisterViewState extends State<RegisterView> {
                     confirmPasswordInputController: _confirmPasswordInputController,
                   ),
                   const Spacer(),
-                  Text(AppStrings.alreadyHaveAccount, style: textTheme.labelSmall),
+                  Text(
+                    AppStrings.alreadyHaveAccount,
+                    style: textTheme.labelSmall!.copyWith(
+                      color: AppColors.slightlyWhite,
+                    ),
+                  ),
                   AppSizes.s6.sizedBoxHeight,
                   OutlinedButton(
                     onPressed: handleBackToLogin,
-                    child: Text(AppStrings.login, style: textTheme.labelSmall),
+                    child: Text(
+                      AppStrings.login,
+                      style: textTheme.labelSmall!.copyWith(color: AppColors.slightlyWhite),
+                    ),
                   ),
                   AppSizes.s20.sizedBoxHeight,
                 ],
