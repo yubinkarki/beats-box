@@ -11,6 +11,7 @@ class AppStrings {
   static const String dialog = "dialog";
   static const String logout = "Logout";
   static const String failed = "Failed";
+  static const String details = "Details";
   static const String library = "Library";
   static const String profile = "Profile";
   static const String contact = "Contact";
@@ -38,6 +39,7 @@ class AppStrings {
   static const String defaultEmail = "mail@email.com";
   static const String userNotFound = "user-not-found";
   static const String wrongPassword = "wrong-password";
+  static const String failedToLogin = "Failed to Login";
   static const String emptyValidation = "Please provide";
   static const String loginCancelled = "Login cancelled";
   static const String noAccount = "Don't have an account?";
