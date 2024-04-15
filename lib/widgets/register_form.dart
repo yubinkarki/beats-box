@@ -37,6 +37,30 @@ class RegisterForm extends StatelessWidget {
     required this.confirmPasswordInputController,
   });
 
+  Widget showButtonOrSpinner(TextTheme textTheme) {
+    return isLoading
+        ? Container(
+            height: AppSizes.s44,
+            width: AppSizes.s100,
+            padding: const EdgeInsets.symmetric(horizontal: AppPaddings.p40, vertical: AppPaddings.p12),
+            child: Center(
+              child: Platform.isIOS
+                  ? const CupertinoActivityIndicator(radius: AppSizes.s12, color: AppColors.white)
+                  : const CircularProgressIndicator(color: Colors.white, strokeWidth: 2),
+            ),
+          )
+        : SizedBox(
+            height: AppSizes.s44,
+            width: AppSizes.s100,
+            child: Center(
+              child: Text(
+                AppStrings.register,
+                style: textTheme.labelMedium!.copyWith(color: AppColors.slightlyWhite),
+              ),
+            ),
+          );
+  }
+
   @override
   Widget build(BuildContext context) {
     String? passwordValue;
@@ -53,39 +77,49 @@ class RegisterForm extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           AppSizes.s50.sizedBoxHeight,
-          Text(AppStrings.welcome, style: textTheme.titleMedium),
+          Text(AppStrings.welcome, style: textTheme.titleMedium!.copyWith(color: AppColors.slightlyWhite)),
           AppSizes.s36.sizedBoxHeight,
           TextFormField(
             maxLength: 50,
             autocorrect: false,
             cursorHeight: AppSizes.s24,
-            style: textTheme.labelMedium,
             keyboardType: TextInputType.text,
             controller: fullNameInputController,
             textCapitalization: TextCapitalization.words,
             validator: (value) => InputValidator.fullNameValidation(value),
             onTapOutside: (event) => FocusManager.instance.primaryFocus?.unfocus(),
+            style: textTheme.labelMedium!.copyWith(color: AppColors.slightlyWhite),
             decoration: inputDecoration(
               colorTheme: colorScheme,
               helperText: AppStrings.empty,
               labelText: AppStrings.fullName,
-              rightIcon: const Icon(Icons.person, size: AppSizes.s20),
+              inputLabelColor: AppColors.slightlyWhite,
+              rightIcon: const Icon(
+                Icons.person,
+                size: AppSizes.s20,
+                color: AppColors.lessLightTeal,
+              ),
             ),
           ),
           AppSizes.s16.sizedBoxHeight,
           TextFormField(
             autocorrect: false,
             cursorHeight: AppSizes.s24,
-            style: textTheme.labelMedium,
             controller: emailInputController,
             keyboardType: TextInputType.emailAddress,
             validator: (value) => InputValidator.emailValidation(value),
             onTapOutside: (event) => FocusManager.instance.primaryFocus?.unfocus(),
+            style: textTheme.labelMedium!.copyWith(color: AppColors.slightlyWhite),
             decoration: inputDecoration(
               colorTheme: colorScheme,
               labelText: AppStrings.email,
               helperText: AppStrings.empty,
-              rightIcon: const Icon(Icons.email, size: AppSizes.s20),
+              inputLabelColor: AppColors.slightlyWhite,
+              rightIcon: const Icon(
+                Icons.email,
+                size: AppSizes.s20,
+                color: AppColors.lessLightTeal,
+              ),
             ),
           ),
           AppSizes.s16.sizedBoxHeight,
@@ -100,14 +134,16 @@ class RegisterForm extends StatelessWidget {
               passwordValue = value;
               return InputValidator.passwordValidation(value);
             },
-            style: textTheme.labelMedium!.copyWith(decorationThickness: 0),
             onTapOutside: (event) => FocusManager.instance.primaryFocus?.unfocus(),
+            style: textTheme.labelMedium!.copyWith(decorationThickness: 0, color: AppColors.slightlyWhite),
             decoration: inputDecoration(
               colorTheme: colorScheme,
               helperText: AppStrings.empty,
               labelText: AppStrings.password,
+              inputLabelColor: AppColors.slightlyWhite,
               rightIcon: IconButton(
                 onPressed: togglePassword,
+                color: AppColors.lessLightTeal,
                 icon: Icon(isPasswordVisible ? Icons.visibility_off : Icons.visibility, size: AppSizes.s20),
               ),
             ),
@@ -120,14 +156,16 @@ class RegisterForm extends StatelessWidget {
             keyboardType: TextInputType.text,
             enableInteractiveSelection: false,
             controller: confirmPasswordInputController,
-            style: textTheme.labelMedium!.copyWith(decorationThickness: 0),
             onTapOutside: (event) => FocusManager.instance.primaryFocus?.unfocus(),
             validator: (value) => InputValidator.confirmPasswordValidation(passwordValue, value),
+            style: textTheme.labelMedium!.copyWith(decorationThickness: 0, color: AppColors.slightlyWhite),
             decoration: inputDecoration(
               colorTheme: colorScheme,
               helperText: AppStrings.empty,
               labelText: AppStrings.confirmPassword,
+              inputLabelColor: AppColors.slightlyWhite,
               rightIcon: IconButton(
+                color: AppColors.lessLightTeal,
                 onPressed: toggleConfirmPassword,
                 icon: Icon(isConfirmPasswordVisible ? Icons.visibility_off : Icons.visibility, size: AppSizes.s20),
               ),
@@ -136,28 +174,11 @@ class RegisterForm extends StatelessWidget {
           AppSizes.s24.sizedBoxHeight,
           ElevatedButton(
             onPressed: onRegisterPress,
-            style: ButtonStyle(
-              backgroundColor: MaterialStateProperty.all(AppColors.purpleMain),
-              padding: MaterialStateProperty.all<EdgeInsetsGeometry>(
-                const EdgeInsets.symmetric(vertical: AppPaddings.p2, horizontal: AppPaddings.p10),
-              ),
+            style: ElevatedButton.styleFrom(
+              backgroundColor: AppColors.purpleMain,
+              padding: const EdgeInsets.symmetric(vertical: AppPaddings.p2, horizontal: AppPaddings.p10),
             ),
-            child: isLoading
-                ? Container(
-                    height: AppSizes.s44,
-                    width: AppSizes.s100,
-                    padding: const EdgeInsets.symmetric(horizontal: AppPaddings.p40, vertical: AppPaddings.p12),
-                    child: Center(
-                      child: Platform.isIOS
-                          ? const CupertinoActivityIndicator(radius: AppSizes.s12, color: AppColors.white)
-                          : const CircularProgressIndicator(color: Colors.white, strokeWidth: 2),
-                    ),
-                  )
-                : SizedBox(
-                    height: AppSizes.s44,
-                    width: AppSizes.s100,
-                    child: Center(child: Text(AppStrings.register, style: textTheme.labelMedium)),
-                  ),
+            child: showButtonOrSpinner(textTheme),
           )
         ],
       ),

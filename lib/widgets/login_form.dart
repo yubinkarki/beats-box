@@ -29,6 +29,30 @@ class LoginForm extends StatelessWidget {
     required this.passwordInputController,
   });
 
+  Widget showButtonOrSpinner(TextTheme textTheme) {
+    return isLoading
+        ? Container(
+            width: AppSizes.s80,
+            height: AppSizes.s34,
+            padding: const EdgeInsets.symmetric(horizontal: AppPaddings.p29, vertical: AppPaddings.p6),
+            child: Center(
+              child: Platform.isIOS
+                  ? const CupertinoActivityIndicator(radius: AppSizes.s12, color: AppColors.white)
+                  : const CircularProgressIndicator(color: Colors.white, strokeWidth: 2),
+            ),
+          )
+        : SizedBox(
+            width: AppSizes.s80,
+            height: AppSizes.s34,
+            child: Center(
+              child: Text(
+                AppStrings.login,
+                style: textTheme.labelMedium!.copyWith(color: AppColors.slightlyWhite),
+              ),
+            ),
+          );
+  }
+
   @override
   Widget build(BuildContext context) {
     final TextTheme textTheme = Theme.of(context).textTheme;
@@ -43,21 +67,26 @@ class LoginForm extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           AppSizes.s50.sizedBoxHeight,
-          Text(AppStrings.welcome, style: textTheme.titleMedium),
+          Text(AppStrings.welcome, style: textTheme.titleMedium!.copyWith(color: AppColors.slightlyWhite)),
           AppSizes.s36.sizedBoxHeight,
           TextFormField(
             autocorrect: false,
             cursorHeight: AppSizes.s24,
-            style: textTheme.labelMedium,
             controller: emailInputController,
             keyboardType: TextInputType.emailAddress,
             validator: (value) => InputValidator.emailValidation(value),
             onTapOutside: (event) => FocusManager.instance.primaryFocus?.unfocus(),
+            style: textTheme.labelMedium!.copyWith(color: AppColors.slightlyWhite),
             decoration: inputDecoration(
-              rightIcon: const Icon(Icons.email, size: AppSizes.s20),
               colorTheme: colorScheme,
               labelText: AppStrings.email,
               helperText: AppStrings.empty,
+              inputLabelColor: AppColors.slightlyWhite,
+              rightIcon: const Icon(
+                Icons.email,
+                size: AppSizes.s20,
+                color: AppColors.lessLightTeal,
+              ),
             ),
           ),
           AppSizes.s16.sizedBoxHeight,
@@ -69,16 +98,18 @@ class LoginForm extends StatelessWidget {
             enableInteractiveSelection: false,
             controller: passwordInputController,
             validator: (value) => InputValidator.passwordValidation(value),
-            style: textTheme.labelMedium!.copyWith(decorationThickness: 0),
             onTapOutside: (event) => FocusManager.instance.primaryFocus?.unfocus(),
+            style: textTheme.labelMedium!.copyWith(decorationThickness: 0, color: AppColors.slightlyWhite),
             decoration: inputDecoration(
-              rightIcon: IconButton(
-                onPressed: togglePassword,
-                icon: Icon(isPasswordVisible ? Icons.visibility_off : Icons.visibility, size: AppSizes.s20),
-              ),
               colorTheme: colorScheme,
               helperText: AppStrings.empty,
               labelText: AppStrings.password,
+              inputLabelColor: AppColors.slightlyWhite,
+              rightIcon: IconButton(
+                onPressed: togglePassword,
+                color: AppColors.lessLightTeal,
+                icon: Icon(isPasswordVisible ? Icons.visibility_off : Icons.visibility, size: AppSizes.s20),
+              ),
             ),
           ),
           AppSizes.s24.sizedBoxHeight,
@@ -88,23 +119,8 @@ class LoginForm extends StatelessWidget {
               backgroundColor: AppColors.purpleMain,
               padding: const EdgeInsets.symmetric(vertical: AppPaddings.p8, horizontal: AppPaddings.p20),
             ),
-            child: isLoading
-                ? Container(
-                    width: AppSizes.s80,
-                    height: AppSizes.s34,
-                    padding: const EdgeInsets.symmetric(horizontal: AppPaddings.p29, vertical: AppPaddings.p6),
-                    child: Center(
-                      child: Platform.isIOS
-                          ? const CupertinoActivityIndicator(radius: AppSizes.s12, color: AppColors.white)
-                          : const CircularProgressIndicator(color: Colors.white, strokeWidth: 2),
-                    ),
-                  )
-                : SizedBox(
-                    width: AppSizes.s80,
-                    height: AppSizes.s34,
-                    child: Center(child: Text(AppStrings.login, style: textTheme.labelMedium)),
-                  ),
-          )
+            child: showButtonOrSpinner(textTheme),
+          ),
         ],
       ),
     );
