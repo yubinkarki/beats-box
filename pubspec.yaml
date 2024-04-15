@@ -39,6 +39,27 @@ dev_dependencies:
 
 # The following section is specific to Flutter packages.
 flutter:
+  fonts:
+    - family: RobotoCondensed
+      fonts:
+        - asset: assets/fonts/roboto_condensed/RobotoCondensed-Black.ttf
+        - asset: assets/fonts/roboto_condensed/RobotoCondensed-BlackItalic.ttf
+        - asset: assets/fonts/roboto_condensed/RobotoCondensed-Bold.ttf
+        - asset: assets/fonts/roboto_condensed/RobotoCondensed-BoldItalic.ttf
+        - asset: assets/fonts/roboto_condensed/RobotoCondensed-ExtraBold.ttf
+        - asset: assets/fonts/roboto_condensed/RobotoCondensed-ExtraBoldItalic.ttf
+        - asset: assets/fonts/roboto_condensed/RobotoCondensed-ExtraLight.ttf
+        - asset: assets/fonts/roboto_condensed/RobotoCondensed-ExtraLightItalic.ttf
+        - asset: assets/fonts/roboto_condensed/RobotoCondensed-Italic.ttf
+        - asset: assets/fonts/roboto_condensed/RobotoCondensed-Light.ttf
+        - asset: assets/fonts/roboto_condensed/RobotoCondensed-LightItalic.ttf
+        - asset: assets/fonts/roboto_condensed/RobotoCondensed-Medium.ttf
+        - asset: assets/fonts/roboto_condensed/RobotoCondensed-MediumItalic.ttf
+        - asset: assets/fonts/roboto_condensed/RobotoCondensed-Regular.ttf
+        - asset: assets/fonts/roboto_condensed/RobotoCondensed-SemiBold.ttf
+        - asset: assets/fonts/roboto_condensed/RobotoCondensed-SemiBoldItalic.ttf
+        - asset: assets/fonts/roboto_condensed/RobotoCondensed-Thin.ttf
+        - asset: assets/fonts/roboto_condensed/RobotoCondensed-ThinItalic.ttf
   uses-material-design: true
 
   assets:
