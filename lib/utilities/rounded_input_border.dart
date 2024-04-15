@@ -4,6 +4,7 @@ import 'package:beats_box/constants/constants_barrel.dart' show AppPaddings, App
 
 InputDecoration inputDecoration({
   required rightIcon,
+  Color? inputLabelColor,
   required String labelText,
   required String helperText,
   required ColorScheme colorTheme,
@@ -13,6 +14,7 @@ InputDecoration inputDecoration({
     suffixIcon: rightIcon,
     helperText: helperText,
     counterText: AppStrings.empty,
+    labelStyle: TextStyle(color: inputLabelColor ?? colorTheme.tertiary),
     contentPadding: const EdgeInsets.symmetric(horizontal: AppPaddings.p16),
     enabledBorder: OutlineInputBorder(
       borderSide: const BorderSide(width: 1, color: Colors.grey),
