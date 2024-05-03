@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' show TextTheme, TextStyle, FontWeight;
 
 import 'package:beats_box/constants/constants_barrel.dart' show LocalFonts, AppColors;
 

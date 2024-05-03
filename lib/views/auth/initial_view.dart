@@ -21,7 +21,7 @@ class InitialView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final authBloc = context.read<AuthBloc>();
+    final AuthBloc authBloc = context.read<AuthBloc>();
 
     authBloc.add(const CheckIsLoggedIn());
     authBloc.add(const AuthEventInitialize());

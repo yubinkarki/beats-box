@@ -1,4 +1,14 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart'
+    show
+        Color,
+        Colors,
+        TextStyle,
+        EdgeInsets,
+        BorderSide,
+        ColorScheme,
+        BorderRadius,
+        InputDecoration,
+        OutlineInputBorder;
 
 import 'package:beats_box/constants/constants_barrel.dart' show AppPaddings, AppSizes, AppStrings;
 
