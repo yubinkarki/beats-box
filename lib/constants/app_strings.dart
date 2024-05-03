@@ -62,6 +62,12 @@ class AppStrings {
   static const String somethingWentWrong = "Something went wrong. Please try again.";
   static const String invalidLoginCredentialsError = "Invalid login credentials, please try again.";
   static const String accountCreationSuccess = "Account created successfully. Please login to continue.";
+  static const String invalidLoginCredentialsDetail =
+      "Either the email or the password that you have entered is incorrect.";
+  static const String somethingWentWrongDetail =
+      "Something did not happen the way it should with our end. Please try again.";
+  static const String emailAlreadyUsedDetail =
+      "This email has already been registered into the system. Please use another email.";
 
   static const String emailRegEx =
       r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
