@@ -95,7 +95,7 @@ class _LoginViewState extends State<LoginView> with SnackMessengerMixin {
                 showCustomGenericDialog<void>(
                   context: context,
                   title: AppStrings.failedToLogin,
-                  content: AppStrings.invalidLoginCredentialsError,
+                  content: AppStrings.invalidLoginCredentialsDetail,
                   optionsBuilder: () => {AppStrings.ok.toUpperCase(): null},
                 );
               },
@@ -108,7 +108,7 @@ class _LoginViewState extends State<LoginView> with SnackMessengerMixin {
                 showCustomGenericDialog<void>(
                   context: context,
                   title: AppStrings.failedToLogin,
-                  content: AppStrings.somethingWentWrong,
+                  content: AppStrings.somethingWentWrongDetail,
                   optionsBuilder: () => {AppStrings.ok.toUpperCase(): null},
                 );
               },

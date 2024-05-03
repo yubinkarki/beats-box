@@ -6,7 +6,7 @@ import "package:beats_box/widgets/widgets_barrel.dart" show RegisterForm;
 import 'package:beats_box/globals/globals_barrel.dart' show GlobalMediaQuery;
 import 'package:beats_box/bloc/blocs_barrel.dart' show AuthBloc, AuthState, RegisterWithCustomEmail;
 import 'package:beats_box/bloc/auth/auth_state.dart' show AccountCreationSuccess, AuthenticationFailure;
-import "package:beats_box/utilities/utilities_barrel.dart" show customMiliDelay, showCustomGenericDialog;
+import "package:beats_box/utilities/utilities_barrel.dart" show customDelay, showCustomGenericDialog;
 import 'package:beats_box/constants/constants_barrel.dart'
     show AppStrings, AppPaddings, CustomImages, AppSizes, AppColors;
 import 'package:beats_box/services/services_barrel.dart'
@@ -74,7 +74,7 @@ class _RegisterViewState extends State<RegisterView> with SnackMessengerMixin {
       final String password = _passwordInputController.text;
       final String fullName = _fullNameInputController.text.toTitleCase;
 
-      await customMiliDelay(300);
+      await customDelay(300);
 
       if (!context.mounted) return;
 
@@ -108,7 +108,7 @@ class _RegisterViewState extends State<RegisterView> with SnackMessengerMixin {
                   context: context,
                   title: AppStrings.failedToCreateAccount,
                   optionsBuilder: () => {AppStrings.ok.toUpperCase(): null},
-                  content: AppStrings.emailAlreadyUsedError,
+                  content: AppStrings.emailAlreadyUsedDetail,
                 );
               },
             );
@@ -120,7 +120,7 @@ class _RegisterViewState extends State<RegisterView> with SnackMessengerMixin {
                 showCustomGenericDialog<void>(
                   context: context,
                   title: AppStrings.failedToLogin,
-                  content: AppStrings.somethingWentWrong,
+                  content: AppStrings.somethingWentWrongDetail,
                   optionsBuilder: () => {AppStrings.ok.toUpperCase(): null},
                 );
               },
