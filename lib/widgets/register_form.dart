@@ -3,9 +3,9 @@ import 'dart:io' show Platform;
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart' show CupertinoActivityIndicator;
 
-import 'package:beats_box/services/services_barrel.dart';
-import 'package:beats_box/constants/constants_barrel.dart';
+import 'package:beats_box/services/services_barrel.dart' show DoubleExtension;
 import 'package:beats_box/utilities/utilities_barrel.dart' show inputDecoration, InputValidator;
+import 'package:beats_box/constants/constants_barrel.dart' show AppStrings, AppSizes, AppColors, AppPaddings;
 
 class RegisterForm extends StatelessWidget {
   final bool isLoading;
