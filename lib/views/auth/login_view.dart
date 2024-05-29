@@ -21,11 +21,11 @@ class LoginView extends StatefulWidget {
 }
 
 class _LoginViewState extends State<LoginView> with SnackMessengerMixin {
-  bool _isLoading = false;
+  // bool _isLoading = false;
   bool _passwordVisible = false;
 
-  final _loginFormKey = GlobalKey<FormState>();
-  final loadingOverlay = getIt.get<LoadingOverlay>();
+  final GlobalKey<FormState> _loginFormKey = GlobalKey<FormState>();
+  final LoadingOverlay loadingOverlay = getIt.get<LoadingOverlay>();
 
   late final TextEditingController _emailInputController;
   late final TextEditingController _passwordInputController;
@@ -83,7 +83,7 @@ class _LoginViewState extends State<LoginView> with SnackMessengerMixin {
     }
 
     return BlocListener<AuthBloc, AuthState>(
-      listener: (context, state) async {
+      listener: (BuildContext context, AuthState state) async {
         if (state is AuthenticationFailure) {
           setState(() => _isLoading = false);
 

@@ -1,4 +1,5 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart'
+    show BuildContext, TextTheme, Theme, showAdaptiveDialog, AlertDialog, Text, TextButton, Navigator;
 
 import 'package:beats_box/constants/constants_barrel.dart' show AppStrings;
 

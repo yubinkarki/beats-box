@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' show WidgetsFlutterBinding, runApp;
 
 import "package:flutter_bloc/flutter_bloc.dart" show Bloc;
 import "package:flutter_native_splash/flutter_native_splash.dart" show FlutterNativeSplash;

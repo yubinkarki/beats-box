@@ -161,9 +161,7 @@ class _RegisterViewState extends State<RegisterView> with SnackMessengerMixin {
                   const Spacer(),
                   Text(
                     AppStrings.alreadyHaveAccount,
-                    style: textTheme.labelSmall!.copyWith(
-                      color: AppColors.slightlyWhite,
-                    ),
+                    style: textTheme.labelSmall!.copyWith(color: AppColors.slightlyWhite),
                   ),
                   AppSizes.s6.sizedBoxHeight,
                   OutlinedButton(

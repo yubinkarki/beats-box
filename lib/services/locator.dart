@@ -9,8 +9,8 @@ final getIt = GetIt.instance;
 Future<void> setupLocator() async {
   getIt.registerSingleton<FlutterSecureStorage>(
     const FlutterSecureStorage(
-      iOptions: IOSOptions(accessibility: KeychainAccessibility.first_unlock),
       aOptions: AndroidOptions(encryptedSharedPreferences: true),
+      iOptions: IOSOptions(accessibility: KeychainAccessibility.first_unlock),
     ),
   );
 

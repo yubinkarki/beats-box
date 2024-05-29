@@ -7,7 +7,7 @@ class GlobalMediaQuery {
   static Orientation? orientation;
 
   static void init(BuildContext context) {
-    _mediaQuerySize = MediaQuery.of(context).size;
+    _mediaQuerySize = MediaQuery.sizeOf(context);
 
     screenWidth = _mediaQuerySize?.width;
     screenHeight = _mediaQuerySize?.height;
