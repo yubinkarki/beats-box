@@ -32,7 +32,7 @@ class _FavoritesViewState extends State<FavoritesView> {
       body: Container(
         height: double.infinity,
         width: double.infinity,
-        decoration: BoxDecoration(color: colorScheme.background),
+        decoration: BoxDecoration(color: colorScheme.surface),
         child: Center(child: Text("Fav screen", style: textTheme.labelMedium)),
       ),
     );

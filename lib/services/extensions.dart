@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart' show Widget, SizedBox;
 
 extension DoubleExtension on double? {
-  double validate({double value = 0.0}) {
+  double validateDouble({double value = 0.0}) {
     return this ?? 0.0;
   }
 
@@ -11,5 +11,5 @@ extension DoubleExtension on double? {
 
 extension StringExtension on String {
   String get toCapitalize => length > 0 ? '${this[0].toUpperCase()}${substring(1).toLowerCase()}' : '';
-  String get toTitleCase => replaceAll(RegExp(' +'), ' ').split(' ').map((str) => str.toCapitalize).join(' ');
+  String get toTitleCase => replaceAll(RegExp(' +'), ' ').split(' ').map((String str) => str.toCapitalize).join(' ');
 }

@@ -34,7 +34,7 @@ class _DashboardViewState extends State<DashboardView> {
       body: Container(
         height: double.infinity,
         width: double.infinity,
-        decoration: BoxDecoration(color: colorScheme.background),
+        decoration: BoxDecoration(color: colorScheme.surface),
         child: Center(child: Text("Dashboard screen", style: textTheme.labelMedium)),
       ),
     );

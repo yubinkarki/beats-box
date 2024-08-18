@@ -18,7 +18,7 @@ class HomeView extends StatefulWidget {
 
 class _HomeViewState extends State<HomeView> {
   int _currentIndex = 0;
-  late final Map<String, dynamic> userData;
+  late final Map<String, dynamic>? userData;
 
   @override
   void initState() {

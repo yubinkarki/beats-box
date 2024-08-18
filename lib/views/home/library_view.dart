@@ -34,7 +34,7 @@ class _LibraryViewState extends State<LibraryView> {
       body: Container(
         height: double.infinity,
         width: double.infinity,
-        decoration: BoxDecoration(color: colorScheme.background),
+        decoration: BoxDecoration(color: colorScheme.surface),
         child: Center(child: Text("Library screen", style: textTheme.labelMedium)),
       ),
     );

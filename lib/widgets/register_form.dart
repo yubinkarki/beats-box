@@ -77,7 +77,7 @@ class RegisterForm extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           AppSizes.s50.sizedBoxHeight,
-          Text(AppStrings.welcome, style: textTheme.titleMedium!.copyWith(color: AppColors.slightlyWhite)),
+          Text(AppStrings.createAccount, style: textTheme.titleMedium!.copyWith(color: AppColors.slightlyWhite)),
           AppSizes.s36.sizedBoxHeight,
           TextFormField(
             maxLength: 50,
@@ -86,8 +86,8 @@ class RegisterForm extends StatelessWidget {
             keyboardType: TextInputType.text,
             controller: fullNameInputController,
             textCapitalization: TextCapitalization.words,
-            validator: (value) => InputValidator.fullNameValidation(value),
-            onTapOutside: (event) => FocusManager.instance.primaryFocus?.unfocus(),
+            validator: (String? value) => InputValidator.fullNameValidation(value),
+            onTapOutside: (PointerDownEvent event) => FocusManager.instance.primaryFocus?.unfocus(),
             style: textTheme.labelMedium!.copyWith(color: AppColors.slightlyWhite),
             decoration: inputDecoration(
               colorTheme: colorScheme,
@@ -107,8 +107,8 @@ class RegisterForm extends StatelessWidget {
             cursorHeight: AppSizes.s24,
             controller: emailInputController,
             keyboardType: TextInputType.emailAddress,
-            validator: (value) => InputValidator.emailValidation(value),
-            onTapOutside: (event) => FocusManager.instance.primaryFocus?.unfocus(),
+            validator: (String? value) => InputValidator.emailValidation(value),
+            onTapOutside: (PointerDownEvent event) => FocusManager.instance.primaryFocus?.unfocus(),
             style: textTheme.labelMedium!.copyWith(color: AppColors.slightlyWhite),
             decoration: inputDecoration(
               colorTheme: colorScheme,
@@ -130,11 +130,11 @@ class RegisterForm extends StatelessWidget {
             keyboardType: TextInputType.text,
             enableInteractiveSelection: false,
             controller: passwordInputController,
-            validator: (value) {
+            validator: (String? value) {
               passwordValue = value;
               return InputValidator.passwordValidation(value);
             },
-            onTapOutside: (event) => FocusManager.instance.primaryFocus?.unfocus(),
+            onTapOutside: (PointerDownEvent event) => FocusManager.instance.primaryFocus?.unfocus(),
             style: textTheme.labelMedium!.copyWith(decorationThickness: 0, color: AppColors.slightlyWhite),
             decoration: inputDecoration(
               colorTheme: colorScheme,
@@ -156,8 +156,8 @@ class RegisterForm extends StatelessWidget {
             keyboardType: TextInputType.text,
             enableInteractiveSelection: false,
             controller: confirmPasswordInputController,
-            onTapOutside: (event) => FocusManager.instance.primaryFocus?.unfocus(),
-            validator: (value) => InputValidator.confirmPasswordValidation(passwordValue, value),
+            onTapOutside: (PointerDownEvent event) => FocusManager.instance.primaryFocus?.unfocus(),
+            validator: (String? value) => InputValidator.confirmPasswordValidation(passwordValue, value),
             style: textTheme.labelMedium!.copyWith(decorationThickness: 0, color: AppColors.slightlyWhite),
             decoration: inputDecoration(
               colorTheme: colorScheme,
@@ -179,7 +179,7 @@ class RegisterForm extends StatelessWidget {
               padding: const EdgeInsets.symmetric(vertical: AppPaddings.p2, horizontal: AppPaddings.p10),
             ),
             child: showButtonOrSpinner(textTheme),
-          )
+          ),
         ],
       ),
     );

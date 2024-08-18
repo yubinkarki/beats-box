@@ -26,6 +26,22 @@ class ProfileView extends StatelessWidget {
     );
   }
 
+  @override
+  Widget build(BuildContext context) {
+    final TextTheme textTheme = Theme.of(context).textTheme;
+    final ColorScheme colorScheme = Theme.of(context).colorScheme;
+
+    return profileContent(
+      context: context,
+      textTheme: textTheme,
+      colorScheme: colorScheme,
+      email: userData?[CustomUserDetails.email.toString()],
+      location: userData?[CustomUserDetails.location.toString()],
+      displayName: userData?[CustomUserDetails.displayName.toString()],
+      phoneNumber: userData?[CustomUserDetails.phoneNumber.toString()],
+    );
+  }
+
   Scaffold profileContent({
     String? email,
     String? location,
@@ -44,7 +60,7 @@ class ProfileView extends StatelessWidget {
             gradient: LinearGradient(
               begin: Alignment.topCenter,
               end: Alignment.bottomCenter,
-              colors: <Color>[colorScheme.outline, colorScheme.background],
+              colors: <Color>[colorScheme.outline, colorScheme.surface],
             ),
           ),
           child: Column(
@@ -89,7 +105,7 @@ class ProfileView extends StatelessWidget {
       body: Container(
         width: double.infinity,
         height: double.infinity,
-        decoration: BoxDecoration(color: colorScheme.background),
+        decoration: BoxDecoration(color: colorScheme.surface),
         child: Column(
           children: [
             Card(
@@ -140,22 +156,6 @@ class ProfileView extends StatelessWidget {
           ],
         ),
       ),
-    );
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    final TextTheme textTheme = Theme.of(context).textTheme;
-    final ColorScheme colorScheme = Theme.of(context).colorScheme;
-
-    return profileContent(
-      context: context,
-      textTheme: textTheme,
-      colorScheme: colorScheme,
-      email: userData?[CustomUserDetails.email.toString()],
-      location: userData?[CustomUserDetails.location.toString()],
-      displayName: userData?[CustomUserDetails.displayName.toString()],
-      phoneNumber: userData?[CustomUserDetails.phoneNumber.toString()],
     );
   }
 }

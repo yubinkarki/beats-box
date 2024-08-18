@@ -4,7 +4,7 @@ import 'package:beats_box/themes/light_text_theme.dart' show lightTextTheme;
 import 'package:beats_box/constants/constants_barrel.dart' show AppColors, AppSizes;
 
 ThemeData lightTheme(BuildContext context) {
-  final base = ThemeData.light();
+  final ThemeData base = ThemeData.light();
 
   return base.copyWith(
     textTheme: lightTextTheme(base.textTheme),
@@ -19,7 +19,7 @@ ThemeData lightTheme(BuildContext context) {
       error: AppColors.red,
       primary: AppColors.teal,
       tertiary: AppColors.dark,
-      background: AppColors.lightTeal,
+      surface: AppColors.lightTeal,
       outline: AppColors.purpleOutline,
       secondary: AppColors.lessLightTeal,
       secondaryContainer: AppColors.slightlyDarkTeal,
