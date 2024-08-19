@@ -5,7 +5,7 @@ import 'package:flutter_native_splash/flutter_native_splash.dart' show FlutterNa
 
 import 'package:beats_box/utilities/utilities_barrel.dart' show showCustomGenericDialog;
 import 'package:beats_box/globals/globals_barrel.dart' show LoadingOverlay, GlobalMediaQuery;
-import "package:beats_box/widgets/widgets_barrel.dart" show LoginForm, customHorizontalLine, SocialLoginButton;
+import 'package:beats_box/widgets/widgets_barrel.dart' show LoginForm, customHorizontalLine, SocialLoginButton;
 import 'package:beats_box/services/services_barrel.dart'
     show getIt, DoubleExtension, InvalidLoginCredentials, SnackMessengerMixin;
 import 'package:beats_box/constants/constants_barrel.dart'
@@ -21,7 +21,7 @@ class LoginView extends StatefulWidget {
 }
 
 class _LoginViewState extends State<LoginView> with SnackMessengerMixin {
-  // bool _isLoading = false;
+  bool _isLoading = false;
   bool _passwordVisible = false;
 
   final GlobalKey<FormState> _loginFormKey = GlobalKey<FormState>();
@@ -60,8 +60,8 @@ class _LoginViewState extends State<LoginView> with SnackMessengerMixin {
   Widget build(BuildContext context) {
     FlutterNativeSplash.remove();
 
-    final authBloc = BlocProvider.of<AuthBloc>(context);
     final TextTheme textTheme = Theme.of(context).textTheme;
+    final AuthBloc authBloc = BlocProvider.of<AuthBloc>(context);
     final ColorScheme colorScheme = Theme.of(context).colorScheme;
 
     Future<void> handleLogin() async {
@@ -96,7 +96,7 @@ class _LoginViewState extends State<LoginView> with SnackMessengerMixin {
                   context: context,
                   title: AppStrings.failedToLogin,
                   content: AppStrings.invalidLoginCredentialsDetail,
-                  optionsBuilder: () => {AppStrings.ok.toUpperCase(): null},
+                  optionsBuilder: () => <String, Null>{AppStrings.ok.toUpperCase(): null},
                 );
               },
             );
@@ -109,7 +109,7 @@ class _LoginViewState extends State<LoginView> with SnackMessengerMixin {
                   context: context,
                   title: AppStrings.failedToLogin,
                   content: AppStrings.somethingWentWrongDetail,
-                  optionsBuilder: () => {AppStrings.ok.toUpperCase(): null},
+                  optionsBuilder: () => <String, Null>{AppStrings.ok.toUpperCase(): null},
                 );
               },
             );
@@ -131,7 +131,7 @@ class _LoginViewState extends State<LoginView> with SnackMessengerMixin {
                 mainAxisSize: MainAxisSize.min,
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
+                children: <Widget>[
                   LoginForm(
                     isLoading: _isLoading,
                     onLoginPress: handleLogin,
@@ -151,7 +151,7 @@ class _LoginViewState extends State<LoginView> with SnackMessengerMixin {
                       textTheme: textTheme,
                       onPressed: handleGoogleLogin,
                       buttonIcon: CustomImages.googleLogo,
-                      buttonColor: colorScheme.background,
+                      buttonColor: colorScheme.surface,
                       buttonText: AppStrings.continueWithGoogle,
                     ),
                   ),
